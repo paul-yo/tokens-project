@@ -1,0 +1,8 @@
+foo() (
+	result1 = 1 + 1 each num1 (
+		console.log(num1)
+	)
+	result2 = 2 + 2 each num2 (
+		console.log(num2)
+	)
+)

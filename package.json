@@ -1,0 +1,22 @@
+{
+	"name": "tokens-demo",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"devDependencies": {
+		"@types/moo": "^0.5.10",
+		"@types/node": "^25.6.0",
+		"tsx": "^4.21.0",
+		"typescript": "^6.0.3"
+	},
+	"dependencies": {
+		"moo": "^0.5.3"
+	}
+}

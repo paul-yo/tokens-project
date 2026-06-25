@@ -1,0 +1,211 @@
+import * as X from "./X.ts";
+
+export const schemaOptions = Symbol("schemaOptions");
+export type TMaskOptions = {
+	[schemaOptions]?: {
+		sparse?: boolean,
+		suffix?: boolean,
+		enclosure?: X.TapeKind,
+	}
+};
+
+export type TMaskFields = { [K: string]: X.TField };
+export type TMaskSchemaObject = TMaskOptions & TMaskFields;
+export type TMaskEnclosureSchemaObject = {
+	enclosure: X.TapeKind,
+	content: X.IManyField | X.IOneField
+};
+
+/** */
+export type TMaskValue = 
+	boolean |
+	X.FixedToken | 
+	X.FlexToken |
+	X.RawToken |
+	X.Mask;
+
+const maskBrand = Symbol("maskBrand");
+
+/** */
+export abstract class Mask
+{
+	/**
+	 * Does a module-wide scan for all mask types and returns them.
+	 */
+	static eachType(): typeof X.Mask[]
+	{
+		return Object.values(X).filter(val =>
+			typeof val === "function" && 
+			maskBrand in val &&
+			val !== X.Mask &&
+			val !== X.EnclosureMask
+		);
+	}
+	private static readonly [maskBrand] = true;
+	
+	/**
+	 * Gets or sets the MaskSchema associated with the mask.
+	 */
+	static get schema()
+	{
+		if (!this._schema)
+			throw "Mask schema not set yet.";
+		
+		return this._schema;
+	}
+	static set schema(value: X.MaskSchema)
+	{
+		this._schema = value;
+	}
+	private static _schema: X.MaskSchema | null = null;
+	
+	/** */
+	static isType(value: any): value is typeof Mask
+	{
+		return typeof value === "function" && value[maskBrand] === true;
+	}
+	
+	/** */
+	static get isEnclosureMask() { return false; }
+	
+	/** */
+	schema(): TMaskSchemaObject { return {}; }
+	
+	/**
+	 * Scans the schema returned by .schema(), and produces a flat list
+	 * of entries—one per field—pairing each field's current runtime
+	 * value with the X.TField metadata that describes it.
+	 */
+	queryFields(): readonly IMaskReflectedField[]
+	{
+		const maskEntries: IMaskReflectedField[] = [];
+		
+		// This naming is strange, and also we shouldn't be calling this
+		// function to re-generate the schema every time, this should be cached.
+		const objectEntries = Object.entries(this.schema());
+		let structureBuffer: X.FixedToken[] = [];
+		
+		let lastIndex = objectEntries.length - 1;
+		const [lastName, lastField] = objectEntries[lastIndex];
+		const lastStructure = X.isStructuralProperty(lastName) ?
+			X.toArray(lastField) as any as X.FixedToken[] :
+			[];
+		
+		for (let i = -1; ++i < objectEntries.length;)
+		{
+			const [name, field] = objectEntries[i];
+			const value = (this as any)[name];
+			
+			if (X.isStructuralProperty(name))
+			{
+				const fixedTokens = X.toArray(field) as any as X.FixedToken[];
+				structureBuffer.push(...fixedTokens);
+				continue;
+			}
+			
+			const structureConditional = field.kind === "has" && !!value ?
+				field.match :
+				[];
+			
+			maskEntries.push({
+				value,
+				field,
+				structureConditional,
+				structureBefore: structureBuffer,
+				structureAfter: i === lastIndex ? lastStructure : [],
+			});
+		}
+		
+		return maskEntries;
+	}
+	
+	/** */
+	queryContainedToken(contained: X.Token | X.Tape): IMaskReflectedToken | null
+	{
+		return null;
+	}
+}
+
+/** */
+export interface IMaskReflectedToken
+{
+	readonly field: X.IMaskReflectedField;
+	readonly fieldIndex: number;
+	readonly siblings: X.IMaskReflectedField[];
+}
+
+/**
+ * Describes a single resolved field within a mask's schema, pairing
+ * the field's current runtime value with the X.TField metadata that
+ * describes how it should be parsed/serialized, along with any fixed
+ * structural tokens that surround it.
+ */
+export interface IMaskReflectedField
+{
+	/**
+	 * The current runtime value of this field, read off the mask
+	 * instance (i.e. `(maskInstance as any)[name]`). May be a single
+	 * TMaskValue, or an array of them when the field is a "many" field.
+	 */
+	readonly value: TMaskValue | TMaskValue[];
+	
+	/**
+	 * The X.TField metadata associated with this field, as declared in
+	 * the schema. Describes how the field's value should be parsed
+	 * from and/or serialized back to tape content (e.g. whether it's
+	 * a one/many field, fixed/flex/raw token, etc).
+	 */
+	readonly field: X.TField;
+	
+	/**
+	 * Stores the fixed structural tokens that are conditionally present
+	 * based on the value of a IHasField. If the local field value is not an
+	 * IHasField, then this will be an empty array.
+	 */
+	readonly structureConditional: readonly X.FixedToken[];
+	
+	/**
+	 * Any fixed structural tokens (literal separators, delimiters, etc)
+	 * that appear in the schema immediately before this field, and
+	 * which were accumulated while scanning prior structural entries.
+	 */
+	readonly structureBefore: readonly X.FixedToken[];
+	
+	/**
+	 * Fixed structural tokens that appear after this field. This is
+	 * only populated for the last field in the schema, and reflects
+	 * the trailing structural tokens defined at the end of the schema
+	 * object (every other field gets an empty array here).
+	 */
+	readonly structureAfter: readonly X.FixedToken[];
+}
+
+/**
+ * 
+ */
+export abstract class EnclosureMask extends X.Mask
+{
+	abstract readonly content: X.Mask | X.Mask[];
+	
+	/** */
+	static get isEnclosureMask() { return true; }
+	
+	/** */
+	schema(): X.TMaskSchemaObject
+	{
+		const { enclosure, content } = this.enclosureSchema();
+		return {
+			[X.schemaOptions]: { enclosure },
+			content
+		};
+	}
+	
+	/** */
+	enclosureSchema(): TMaskEnclosureSchemaObject
+	{
+		return { 
+			enclosure: X.TapeKind.none,
+			content: X.many(),
+		};
+	}
+}

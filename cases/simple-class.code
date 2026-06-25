@@ -1,0 +1,16 @@
+Animal
+(
+	eat()
+	(
+		
+	)
+)
+
+Bunny is Animal
+(
+	eat()
+	(
+		super.eat()
+		console.log("Eating")
+	)
+)
