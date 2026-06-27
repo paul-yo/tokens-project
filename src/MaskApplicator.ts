@@ -81,9 +81,6 @@ function tryApplyMask(
 		const mask = new (maskSchema.type as any)(); // 🫤
 		const matches = matchesArray[i];
 		
-		if (mask instanceof X.InfixedChainMask) debugger;
-		if (mask instanceof X.OriginParticleMask) debugger;
-		
 		for (const group of matches.groups)
 		{
 			const field = maskSchema.fields[group.name];
