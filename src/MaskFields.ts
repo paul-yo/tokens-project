@@ -10,21 +10,6 @@ export type IField =
 	IOneField |
 	IManyField;
 
-/** 
- * "Evaluables" are a field pattern that are pervasive throughout 
- * the production rules so they're defined once here.
- */
-export type Evaluable = X.EntityToken | X.LiteralToken | X.ExpressionMasks;
-
-/**
- * This is a shortcut function for a form that keeps coming up
- * repeatedly in the production rules.
- */
-export function evaluable()
-{
-	return one(X.EntityToken, X.LiteralToken, ...X.ExpressionMasks);
-}
-
 //# Raw field
 
 /** */
