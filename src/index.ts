@@ -1,3 +1,5 @@
+import { test } from "node:test";
+import * as assert from "node:assert/strict";
 import * as Fs from "node:fs";
 import moo from "moo";
 import * as X from "./X.ts";
@@ -5,7 +7,7 @@ import * as X from "./X.ts";
 /** */
 async function start()
 {
-	console.log("\n".repeat(10)); // Because VS Code's terminal is weird.
+	X.DEBUG && console.log("\n".repeat(10)); // Because VS Code's terminal is weird.
 	
 	//# Setup the moo parser rules
 	
@@ -38,6 +40,8 @@ async function start()
 	};
 	
 	const lexer = moo.compile(rules);
+	
+	X.registerFlexTokens(X.flexTokens, X.flexTokensAbstract);
 	
 	//# Setup the proxy characters
 	

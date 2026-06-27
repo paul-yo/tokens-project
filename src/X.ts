@@ -4,6 +4,7 @@
 export * from "./Util.ts";
 export * from "./MapSet.ts";
 export * from "./Proxy.ts";
+export * from "./Token.ts";
 export * from "./TokenModel.ts";
 export * from "./Tape.ts";
 export * from "./Fragment.ts";
