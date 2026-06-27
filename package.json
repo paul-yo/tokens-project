@@ -1,22 +1,22 @@
 {
-	"name": "tokens-demo",
+	"name": "tokens-project",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
+	"author": "Paul Young",
+	"license": "MIT",
+	"description": "A parsing architecture designed to enable a new category of languages and code editors.",
+	"keywords": ["editor", "parser", "compiler", "languages"],
+	"type": "module",
 	"scripts": {
+		"start": "node src/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"type": "module",
+	"dependencies": {
+		"moo": "^0.5.3"
+	},
 	"devDependencies": {
 		"@types/moo": "^0.5.10",
 		"@types/node": "^25.6.0",
 		"tsx": "^4.21.0",
 		"typescript": "^6.0.3"
-	},
-	"dependencies": {
-		"moo": "^0.5.3"
 	}
 }
