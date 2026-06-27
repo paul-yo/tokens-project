@@ -1,4 +1,4 @@
-import * as X from "./X.ts";
+import * as X from "./XX.ts";
 
 export type SpaceBodyMasks = X.Sum<typeof SpaceBodyMasks>;
 export const SpaceBodyMasks = X.sum(

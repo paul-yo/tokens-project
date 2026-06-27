@@ -135,8 +135,6 @@ export abstract class RawToken extends Token
 	abstract readonly text: string;
 }
 
-
-
 // The purpose of this getBit function and the classBitMap is
 // to provide fast lookups of the inheritance chain of a FlexToken,
 // so that you can see the type lineage of a FlexToken constructor
@@ -159,8 +157,8 @@ function asPlain(flex: X.FlexToken)
 
 /** */
 export function registerFlexTokens(
-	physicalFlex: Readonly<Record<string, typeof X.FlexToken>>,
-	abstractFlex: Readonly<Record<string, typeof X.FlexToken>> = {})
+	physicalFlex: X.TFlexTokenTable,
+	abstractFlex: X.TFlexTokenTable = {})
 {
 	let nextBitShift = 0;
 	const flexTypes = [

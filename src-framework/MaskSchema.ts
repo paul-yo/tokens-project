@@ -6,16 +6,16 @@ export class MaskSchema
 	/**
 	 * Compiles all schemas for all masks.
 	 */
-	static compile()
+	static compile(spec: X.ILanguageSpec)
 	{
-		for (const sch of this.visitTopological())
+		for (const sch of this.visitTopological(spec))
 		{
 			sch._insidePattern = createPatternForMask(sch, true);
 			sch._matchPattern = createPatternForMask(sch, false);
 			
 			const flags = "du" + (sch.sparse ? "g" : "");
 			
-			if (sch.enclosure !== X.TapeKind.none)
+			if (sch.enclosure !== X.Enclosure.none)
 				sch._enclosureAwareMatcher = new RegExp(X.Proxy.get(sch.enclosure), flags);
 			
 			if (sch._matchPattern !== "")
@@ -40,7 +40,7 @@ export class MaskSchema
 			{
 				const field = fields[0];
 				if (field.kind === "many" || field.kind === "some")
-					if (field.data.enclosure === X.TapeKind.none)
+					if (field.data.enclosure === X.Enclosure.none)
 						if (field.match.every(m => X.Mask.isType(m)))
 							field.data.sink = true;
 			}
@@ -54,7 +54,7 @@ export class MaskSchema
 	 * Fields can reference other masks and embed their regular expressions
 	 * and if these are not yet constructed... disappointment will result.
 	 */
-	private static * visitTopological()
+	private static * visitTopological(spec: X.ILanguageSpec)
 	{
 		// Pre-load the seen set with known abstract base classes we don't want to hit.
 		const seen = new Set<typeof X.Mask>([
@@ -80,8 +80,8 @@ export class MaskSchema
 			yield schema;
 		};
 		
-		for (const maskType of X.Mask.eachType())
-			yield * recurse(maskType);
+		for (const maskType of spec.masks)
+			yield * recurse(maskType)
 	}
 	
 	/** */
@@ -95,7 +95,7 @@ export class MaskSchema
 		const options = schemaObject[X.schemaOptions];
 		this.sparse = !!options?.sparse;
 		this.suffix = !!options?.suffix;
-		this.enclosure = options?.enclosure || X.TapeKind.none;
+		this.enclosure = options?.enclosure || X.Enclosure.none;
 		
 		if (this.sparse && this.suffix)
 			throw "Masks cannot be both suffixes and defined as sparse.";
@@ -108,7 +108,7 @@ export class MaskSchema
 	readonly fields: X.TMaskFields;
 	
 	/** Stores the delimiter of the tape enclosure in which this mask is expected to be wrapped.  */
-	readonly enclosure: X.TapeKind = X.TapeKind.none;
+	readonly enclosure: X.Enclosure = X.Enclosure.none;
 	
 	/** */
 	readonly sparse: boolean;
@@ -175,7 +175,7 @@ function createPatternForMask(schema: MaskSchema, inside: boolean)
 	// have enclosures are just the proxy character of that enclosure. This
 	// is because inside patterns are used for embedding, and the only thing
 	// that would be visible in a tape is the enclosure proxy character.
-	if (inside && schema.enclosure !== X.TapeKind.none)
+	if (inside && schema.enclosure !== X.Enclosure.none)
 		return X.Proxy.get(schema.enclosure);
 	
 	const pattern: string[] = [];
@@ -270,7 +270,7 @@ function createPatternForField(field: X.TField, inside: boolean): string[]
 	// the pattern only needs to match a proxy character for the enclosure.
 	// The field will have other constraints too (like one or many) but these
 	// would be handled in the applicator rather than filtered in the regex.
-	if (field.data.enclosure !== X.TapeKind.none)
+	if (field.data.enclosure !== X.Enclosure.none)
 		return [X.Proxy.get(field.data.enclosure)];
 	
 	const pattern: string[] = [];
@@ -313,7 +313,7 @@ function createPatternForField(field: X.TField, inside: boolean): string[]
 		// the generated charstring. Note that it is intentional
 		// that this is the first thing that gets checked after the
 		// the match has been narrowed to a typeof Mask.
-		else if (match.schema.enclosure !== X.TapeKind.none)
+		else if (match.schema.enclosure !== X.Enclosure.none)
 			chars.push(X.Proxy.get(match.schema.enclosure));
 		
 		// In the case when you get a single wildcard pattern,

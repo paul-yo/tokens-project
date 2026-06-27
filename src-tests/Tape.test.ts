@@ -1,107 +1,11 @@
+import * as X from "../src-language/XX.ts";
 import { test } from "node:test";
 import * as assert from "node:assert/strict";
-import * as Fs from "node:fs";
-import moo from "moo";
-import * as X from "./X.ts";
 
 /** */
-async function start()
+export async function testTape()
 {
-	X.DEBUG && console.log("\n".repeat(10)); // Because VS Code's terminal is weird.
-	
-	//# Setup the moo parser rules
-	
-	const rules: moo.Rules = {};
-	const words: Record<string, string> = {};
-	
-	for (const fixedToken of X.eachFixedToken())
-	{
-		if (X.EntityToken.pattern.test(fixedToken.text))
-			words[fixedToken.text] = fixedToken.text;
-		else
-			rules[fixedToken.text] = fixedToken.text;
-	}
-	
-	for (const flex of Object.values(X.flexTokens))
-		rules[flex.name] = flex.pattern;
-	
-	// Entities and newline tokens need to be special-cased for the moo lexer
-	
-	const kw = moo.keywords(words);
-	
-	rules[X.EntityToken.name] = {
-		match: X.EntityToken.pattern,
-		type: kw,
-	};
-	
-	rules[X.NewlineToken.name] = {
-		match: X.NewlineToken.pattern,
-		lineBreaks: true,
-	};
-	
-	const lexer = moo.compile(rules);
-	
-	X.registerFlexTokens(X.flexTokens, X.flexTokensAbstract);
-	
-	//# Setup the proxy characters
-	
-	X.Proxy.define(X.RawToken);
-	
-	for (const tape of Object.values(X.TapeKind))
-		X.Proxy.define(tape);
-	
-	for (const fixed of X.eachFixedToken())
-		X.Proxy.define(fixed);
-	
-	for (const abstractFlexType of Object.values(X.flexTokensAbstract))
-		X.Proxy.define(abstractFlexType);
-	
-	for (const flexType of Object.values(X.flexTokens))
-		X.Proxy.define(flexType);
-	
-	for (const maskType of X.Mask.eachType())
-		X.Proxy.define(maskType);
-	
-	X.MaskSchema.compile();
-	
-	//#
-	
-	//if (1) return void await testTapeMasks();
-	//if (1) return void (await import("./Legend.ts")).Legend.write("./legend.md");
-	
-	const code = readCase("simple-function-0");
-	lexer.reset(code);
-	const mooTokens = Array.from(lexer);
-	const stringTokens = Object.freeze(mooTokens.map(s => s.text));
-	
-	const tp = new X.TapeParser(stringTokens);
-	const rootTape = tp.parse();
-	X.applyApexMasks(rootTape);
-	
-	// You should now be able to go through the tape 
-	// and it should have the whole mask graph in there.
-	debugger;
-}
-
-/** */
-function readCase(fileBase: string)
-{
-	const content = Fs.readFileSync("./cases/" + fileBase + ".code", "utf-8");
-	return content;
-}
-
-setTimeout(start, 100);
-
-/** */
-async function testTape()
-{
-	const { Tape } = await import("./Tape.ts");
-	type Tape = import("./Tape.ts").Tape;
-	
-	const { Lens } = await import("./Lens.ts");
-	type Lens = import("./Lens.ts").Lens;
-	
-	const tape = new Tape();
+	const tape = createTape();
 	const tokens = [
 		X.tokens.big,
 		X.tokens.bigx1,
@@ -246,15 +150,9 @@ async function testTape()
 }
 
 /** */
-async function testTapeMasks()
+export async function testTapeMasks()
 {
-	const { Tape } = await import("./Tape.ts");
-	type Tape = import("./Tape.ts").Tape;
-	
-	const { Lens } = await import("./Lens.ts");
-	type Lens = import("./Lens.ts").Lens;
-	
-	const tape = new Tape();
+	const tape = createTape();
 	const tokens = [
 		X.EntityToken.new("a"),
 		X.tokens.basicAssign,
@@ -290,4 +188,10 @@ async function testTapeMasks()
 	lens.applyMask(infixMask, 0, 3);
 	
 	console.log(lens.charstringReadable);
+}
+
+/** */
+function createTape()
+{
+	return new X.Tape(X.tokens.comma);
 }

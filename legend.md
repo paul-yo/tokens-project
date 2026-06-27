@@ -240,121 +240,121 @@
 | ⚓ | 9875 | U+2693 | decimal |
 | ⚔ | 9876 | U+2694 | number |
 | ⚕ | 9877 | U+2695 | string |
-| ⚖ | 9878 | U+2696 | ( |
-| ⚗ | 9879 | U+2697 | ) |
-| ⚘ | 9880 | U+2698 | [ |
-| ⚙ | 9881 | U+2699 | ] |
-| ⚚ | 9882 | U+269A | { |
-| ⚛ | 9883 | U+269B | } |
-| ⚜ | 9884 | U+269C | " |
-| ⚝ | 9885 | U+269D | """ |
-| ⚞ | 9886 | U+269E | (( |
-| ⚟ | 9887 | U+269F | )) |
-| ⚠ | 9888 | U+26A0 | aliasof |
-| ⚡ | 9889 | U+26A1 | analyzer |
-| ⚢ | 9890 | U+26A2 | and |
-| ⚣ | 9891 | U+26A3 | any |
-| ⚤ | 9892 | U+26A4 | copy |
-| ⚥ | 9893 | U+26A5 | declare |
-| ⚦ | 9894 | U+26A6 | defer |
-| ⚧ | 9895 | U+26A7 | delete |
-| ⚨ | 9896 | U+26A8 | exempt |
-| ⚩ | 9897 | U+26A9 | export |
-| ⚪ | 9898 | U+26AA | expose |
-| ⚫ | 9899 | U+26AB | extend |
-| ⚬ | 9900 | U+26AC | fn |
-| ⚭ | 9901 | U+26AD | from |
-| ⚮ | 9902 | U+26AE | ghost |
-| ⚯ | 9903 | U+26AF | interface |
-| ⚰ | 9904 | U+26B0 | isnot |
-| ⚱ | 9905 | U+26B1 | is |
-| ⚲ | 9906 | U+26B2 | manyof |
-| ⚳ | 9907 | U+26B3 | matches |
-| ⚴ | 9908 | U+26B4 | oneof |
-| ⚵ | 9909 | U+26B5 | onevalueof |
-| ⚶ | 9910 | U+26B6 | or |
-| ⚷ | 9911 | U+26B7 | ref |
-| ⚸ | 9912 | U+26B8 | space |
-| ⚹ | 9913 | U+26B9 | start |
-| ⚺ | 9914 | U+26BA | step |
-| ⚻ | 9915 | U+26BB | strong |
-| ⚼ | 9916 | U+26BC | super |
-| ⚽ | 9917 | U+26BD | this |
-| ⚾ | 9918 | U+26BE | throw |
-| ⚿ | 9919 | U+26BF | til |
-| ⛀ | 9920 | U+26C0 | to |
-| ⛁ | 9921 | U+26C1 | typeof |
-| ⛂ | 9922 | U+26C2 | var |
-| ⛃ | 9923 | U+26C3 | weak |
-| ⛄ | 9924 | U+26C4 | worker |
-| ⛅ | 9925 | U+26C5 | infinity |
-| ⛆ | 9926 | U+26C6 | nan |
-| ⛇ | 9927 | U+26C7 | null |
-| ⛈ | 9928 | U+26C8 | : |
-| ⛉ | 9929 | U+26C9 | , |
-| ⛊ | 9930 | U+26CA | . |
-| ⛋ | 9931 | U+26CB | #! |
-| ⛌ | 9932 | U+26CC | ! |
-| ⛍ | 9933 | U+26CD | ? |
-| ⛎ | 9934 | U+26CE | ... |
-| ⛏ | 9935 | U+26CF | : |
-| ⛐ | 9936 | U+26D0 | = |
-| ⛑ | 9937 | U+26D1 | /= |
-| ⛒ | 9938 | U+26D2 | -= |
-| ⛓ | 9939 | U+26D3 | %= |
-| ⛔ | 9940 | U+26D4 | *= |
-| ⛕ | 9941 | U+26D5 | += |
-| ⛖ | 9942 | U+26D6 | << |
-| ⛗ | 9943 | U+26D7 | >> |
-| ⛘ | 9944 | U+26D8 | >>> |
-| ⛙ | 9945 | U+26D9 | & |
-| ⛚ | 9946 | U+26DA | ^ |
-| ⛛ | 9947 | U+26DB | == |
-| ⛜ | 9948 | U+26DC | != |
-| ⛝ | 9949 | U+26DD | + |
-| ⛞ | 9950 | U+26DE | \ |
-| ⛟ | 9951 | U+26DF | / |
-| ⛠ | 9952 | U+26E0 | ** |
-| ⛡ | 9953 | U+26E1 | > |
-| ⛢ | 9954 | U+26E2 | >= |
-| ⛣ | 9955 | U+26E3 | < |
-| ⛤ | 9956 | U+26E4 | <= |
-| ⛥ | 9957 | U+26E5 | % |
-| ⛦ | 9958 | U+26E6 | * |
-| ⛧ | 9959 | U+26E7 | - |
-| ⛨ | 9960 | U+26E8 | catch |
-| ⛩ | 9961 | U+26E9 | each |
-| ⛪ | 9962 | U+26EA | build |
-| ⛫ | 9963 | U+26EB | // |
-| ⛬ | 9964 | U+26EC | \\ |
-| ⛭ | 9965 | U+26ED | else |
-| ⛮ | 9966 | U+26EE | ensure |
-| ⛯ | 9967 | U+26EF | if |
-| ⛰ | 9968 | U+26F0 | return |
-| ⛱ | 9969 | U+26F1 | break |
-| ⛲ | 9970 | U+26F2 | break.2 |
-| ⛳ | 9971 | U+26F3 | break.3 |
-| ⛴ | 9972 | U+26F4 | break.4 |
-| ⛵ | 9973 | U+26F5 | break.5 |
-| ⛶ | 9974 | U+26F6 | break.6 |
-| ⛷ | 9975 | U+26F7 | break.7 |
-| ⛸ | 9976 | U+26F8 | break.8 |
-| ⛹ | 9977 | U+26F9 | continue |
-| ⛺ | 9978 | U+26FA | continue.2 |
-| ⛻ | 9979 | U+26FB | continue.3 |
-| ⛼ | 9980 | U+26FC | continue.4 |
-| ⛽ | 9981 | U+26FD | continue.5 |
-| ⛾ | 9982 | U+26FE | continue.6 |
-| ⛿ | 9983 | U+26FF | continue.7 |
-| ✀ | 9984 | U+2700 | continue.8 |
-| ✁ | 9985 | U+2701 | yield |
-| ✂ | 9986 | U+2702 | yield.2 |
-| ✃ | 9987 | U+2703 | yield.3 |
-| ✄ | 9988 | U+2704 | yield.4 |
-| ✅ | 9989 | U+2705 | yield.5 |
-| ✆ | 9990 | U+2706 | yield.6 |
-| ✇ | 9991 | U+2707 | yield.7 |
-| ✈ | 9992 | U+2708 | yield.8 |
+| ⚖ | 9878 | U+2696 | aliasof |
+| ⚗ | 9879 | U+2697 | analyzer |
+| ⚘ | 9880 | U+2698 | and |
+| ⚙ | 9881 | U+2699 | any |
+| ⚚ | 9882 | U+269A | copy |
+| ⚛ | 9883 | U+269B | declare |
+| ⚜ | 9884 | U+269C | defer |
+| ⚝ | 9885 | U+269D | delete |
+| ⚞ | 9886 | U+269E | exempt |
+| ⚟ | 9887 | U+269F | export |
+| ⚠ | 9888 | U+26A0 | expose |
+| ⚡ | 9889 | U+26A1 | extend |
+| ⚢ | 9890 | U+26A2 | fn |
+| ⚣ | 9891 | U+26A3 | from |
+| ⚤ | 9892 | U+26A4 | ghost |
+| ⚥ | 9893 | U+26A5 | interface |
+| ⚦ | 9894 | U+26A6 | isnot |
+| ⚧ | 9895 | U+26A7 | is |
+| ⚨ | 9896 | U+26A8 | manyof |
+| ⚩ | 9897 | U+26A9 | matches |
+| ⚪ | 9898 | U+26AA | oneof |
+| ⚫ | 9899 | U+26AB | onevalueof |
+| ⚬ | 9900 | U+26AC | or |
+| ⚭ | 9901 | U+26AD | ref |
+| ⚮ | 9902 | U+26AE | space |
+| ⚯ | 9903 | U+26AF | start |
+| ⚰ | 9904 | U+26B0 | step |
+| ⚱ | 9905 | U+26B1 | strong |
+| ⚲ | 9906 | U+26B2 | super |
+| ⚳ | 9907 | U+26B3 | this |
+| ⚴ | 9908 | U+26B4 | throw |
+| ⚵ | 9909 | U+26B5 | til |
+| ⚶ | 9910 | U+26B6 | to |
+| ⚷ | 9911 | U+26B7 | typeof |
+| ⚸ | 9912 | U+26B8 | var |
+| ⚹ | 9913 | U+26B9 | weak |
+| ⚺ | 9914 | U+26BA | worker |
+| ⚻ | 9915 | U+26BB | infinity |
+| ⚼ | 9916 | U+26BC | nan |
+| ⚽ | 9917 | U+26BD | null |
+| ⚾ | 9918 | U+26BE | : |
+| ⚿ | 9919 | U+26BF | , |
+| ⛀ | 9920 | U+26C0 | . |
+| ⛁ | 9921 | U+26C1 | #! |
+| ⛂ | 9922 | U+26C2 | ! |
+| ⛃ | 9923 | U+26C3 | ? |
+| ⛄ | 9924 | U+26C4 | ... |
+| ⛅ | 9925 | U+26C5 | : |
+| ⛆ | 9926 | U+26C6 | = |
+| ⛇ | 9927 | U+26C7 | /= |
+| ⛈ | 9928 | U+26C8 | -= |
+| ⛉ | 9929 | U+26C9 | %= |
+| ⛊ | 9930 | U+26CA | *= |
+| ⛋ | 9931 | U+26CB | += |
+| ⛌ | 9932 | U+26CC | << |
+| ⛍ | 9933 | U+26CD | >> |
+| ⛎ | 9934 | U+26CE | >>> |
+| ⛏ | 9935 | U+26CF | & |
+| ⛐ | 9936 | U+26D0 | ^ |
+| ⛑ | 9937 | U+26D1 | == |
+| ⛒ | 9938 | U+26D2 | != |
+| ⛓ | 9939 | U+26D3 | + |
+| ⛔ | 9940 | U+26D4 | \ |
+| ⛕ | 9941 | U+26D5 | / |
+| ⛖ | 9942 | U+26D6 | ** |
+| ⛗ | 9943 | U+26D7 | > |
+| ⛘ | 9944 | U+26D8 | >= |
+| ⛙ | 9945 | U+26D9 | < |
+| ⛚ | 9946 | U+26DA | <= |
+| ⛛ | 9947 | U+26DB | % |
+| ⛜ | 9948 | U+26DC | * |
+| ⛝ | 9949 | U+26DD | - |
+| ⛞ | 9950 | U+26DE | catch |
+| ⛟ | 9951 | U+26DF | each |
+| ⛠ | 9952 | U+26E0 | build |
+| ⛡ | 9953 | U+26E1 | // |
+| ⛢ | 9954 | U+26E2 | \\ |
+| ⛣ | 9955 | U+26E3 | else |
+| ⛤ | 9956 | U+26E4 | ensure |
+| ⛥ | 9957 | U+26E5 | if |
+| ⛦ | 9958 | U+26E6 | return |
+| ⛧ | 9959 | U+26E7 | break |
+| ⛨ | 9960 | U+26E8 | break.2 |
+| ⛩ | 9961 | U+26E9 | break.3 |
+| ⛪ | 9962 | U+26EA | break.4 |
+| ⛫ | 9963 | U+26EB | break.5 |
+| ⛬ | 9964 | U+26EC | break.6 |
+| ⛭ | 9965 | U+26ED | break.7 |
+| ⛮ | 9966 | U+26EE | break.8 |
+| ⛯ | 9967 | U+26EF | continue |
+| ⛰ | 9968 | U+26F0 | continue.2 |
+| ⛱ | 9969 | U+26F1 | continue.3 |
+| ⛲ | 9970 | U+26F2 | continue.4 |
+| ⛳ | 9971 | U+26F3 | continue.5 |
+| ⛴ | 9972 | U+26F4 | continue.6 |
+| ⛵ | 9973 | U+26F5 | continue.7 |
+| ⛶ | 9974 | U+26F6 | continue.8 |
+| ⛷ | 9975 | U+26F7 | yield |
+| ⛸ | 9976 | U+26F8 | yield.2 |
+| ⛹ | 9977 | U+26F9 | yield.3 |
+| ⛺ | 9978 | U+26FA | yield.4 |
+| ⛻ | 9979 | U+26FB | yield.5 |
+| ⛼ | 9980 | U+26FC | yield.6 |
+| ⛽ | 9981 | U+26FD | yield.7 |
+| ⛾ | 9982 | U+26FE | yield.8 |
+| ⛿ | 9983 | U+26FF | ( |
+| ✀ | 9984 | U+2700 | ) |
+| ✁ | 9985 | U+2701 | [ |
+| ✂ | 9986 | U+2702 | ] |
+| ✃ | 9987 | U+2703 | { |
+| ✄ | 9988 | U+2704 | } |
+| ✅ | 9989 | U+2705 | " |
+| ✆ | 9990 | U+2706 | """ |
+| ✇ | 9991 | U+2707 | (( |
+| ✈ | 9992 | U+2708 | )) |
 | ✉ | 9993 | U+2709 | > |
 | ✊ | 9994 | U+270A | /> |
 
@@ -364,27 +364,27 @@
 | --- | --- | --- | --- | --- |
 | ✋ | 9995 | U+270B | LiteralToken | `(no pattern)` |
 | ✌ | 9996 | U+270C | ParticleLiteralToken | `(no pattern)` |
-| ✍ | 9997 | U+270D | WhitespaceToken | `(no pattern)` |
-| ✎ | 9998 | U+270E | FlexDelimiterToken | `(no pattern)` |
-| ✏ | 9999 | U+270F | EntityToken | `[a-zA-Z]{1,}[a-zA-Z0-9_]{0,}` |
-| ✐ | 10000 | U+2710 | QuantityToken | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)(?:\.[0-9]+(?:_+[0-9]+)*)?[a-zA-Z][a-zA-Z0-9_]*` |
-| ✑ | 10001 | U+2711 | UnsignedIntegerToken | `^(?:0|[1-9][0-9]*(?:_+[0-9]+)*)u$` |
-| ✒ | 10002 | U+2712 | DecimalToken | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*` |
-| ✓ | 10003 | U+2713 | Float32Token | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*f` |
-| ✔ | 10004 | U+2714 | Float64Token | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*ff` |
-| ✕ | 10005 | U+2715 | Float128Token | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*fff` |
-| ✖ | 10006 | U+2716 | HexToken | `0x[0-9A-Fa-f]+(?:_+[0-9A-Fa-f]+)*` |
-| ✗ | 10007 | U+2717 | CharToken | `'(?:[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF])'` |
-| ✘ | 10008 | U+2718 | RegexToken | `\/{1,}\/` |
-| ✙ | 10009 | U+2719 | IntegerToken | `-?(?:0|[1-9][0-9]*(?:_+[0-9]+)*)` |
-| ✚ | 10010 | U+271A | MarkupOpenToken | `<[A-Za-z][A-Za-z0-9_]{0,}` |
-| ✛ | 10011 | U+271B | MarkupStartToken | `<[A-Za-z][A-Za-z0-9_]{0,}>` |
-| ✜ | 10012 | U+271C | MarkupEndToken | `<\/[A-Za-z][A-Za-z0-9_]{0,}>` |
-| ✝ | 10013 | U+271D | MarkupAttrStartToken | `[A-Za-z0-9]+=` |
-| ✞ | 10014 | U+271E | SpaceToken | `[ \t]{1}[ \t]*` |
-| ✟ | 10015 | U+271F | NewlineToken | `\r?\n` |
+| ✏ | 9999 | U+270F | WhitespaceToken | `(no pattern)` |
+| ✐ | 10000 | U+2710 | FlexDelimiterToken | `(no pattern)` |
+| ✢ | 10018 | U+2722 | EntityToken | `[a-zA-Z]{1,}[a-zA-Z0-9_]{0,}` |
+| ✒ | 10002 | U+2712 | QuantityToken | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)(?:\.[0-9]+(?:_+[0-9]+)*)?[a-zA-Z][a-zA-Z0-9_]*` |
+| ✓ | 10003 | U+2713 | UnsignedIntegerToken | `^(?:0|[1-9][0-9]*(?:_+[0-9]+)*)u$` |
+| ✔ | 10004 | U+2714 | DecimalToken | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*` |
+| ✕ | 10005 | U+2715 | Float32Token | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*f` |
+| ✖ | 10006 | U+2716 | Float64Token | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*ff` |
+| ✗ | 10007 | U+2717 | Float128Token | `(?:0|[1-9][0-9]*(?:_+[0-9]+)*)\.[0-9]+(?:_+[0-9]+)*fff` |
+| ✘ | 10008 | U+2718 | HexToken | `0x[0-9A-Fa-f]+(?:_+[0-9A-Fa-f]+)*` |
+| ✙ | 10009 | U+2719 | CharToken | `'(?:[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF])'` |
+| ✚ | 10010 | U+271A | RegexToken | `\/{1,}\/` |
+| ✛ | 10011 | U+271B | IntegerToken | `-?(?:0|[1-9][0-9]*(?:_+[0-9]+)*)` |
+| ✥ | 10021 | U+2725 | MarkupOpenToken | `<[A-Za-z][A-Za-z0-9_]{0,}` |
+| ✦ | 10022 | U+2726 | MarkupStartToken | `<[A-Za-z][A-Za-z0-9_]{0,}>` |
+| ✧ | 10023 | U+2727 | MarkupEndToken | `<\/[A-Za-z][A-Za-z0-9_]{0,}>` |
+| ✨ | 10024 | U+2728 | MarkupAttrStartToken | `[A-Za-z0-9]+=` |
+| ✣ | 10019 | U+2723 | SpaceToken | `[ \t]{1}[ \t]*` |
+| ✤ | 10020 | U+2724 | NewlineToken | `\r?\n` |
 
-## Enclosures
+## Tape Kinds
 
 | Character | Code | Unicode | Kind |
 | --- | --- | --- | --- |
@@ -401,29 +401,29 @@
 
 ### AliasMask
 
-- **Character:** ✠
-- **Code:** 10016
-- **Unicode:** U+2720
-- **Full Pattern:** `^(?<name>[✏])⚱⚠(?<type>.)$`
-- **Fast Pattern:** `[✏]⚱⚠.`
+- **Character:** ✩
+- **Code:** 10025
+- **Unicode:** U+2729
+- **Full Pattern:** `^(?<name>[✢])⚧⚖(?<type>.)$`
+- **Fast Pattern:** `[✢]⚧⚖.`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is  aliasof (?<type>.)$`
 - **Debug Fast Pattern:** `[ EntityToken ] is  aliasof .`
 
 ### BreakStatementMask
 
-- **Character:** ✡
-- **Code:** 10017
-- **Unicode:** U+2721
-- **Full Pattern:** `^(?<kind>[⛱-⛸])(?<expression>.+?)$`
-- **Fast Pattern:** `[⛱-⛸].+?`
+- **Character:** ✪
+- **Code:** 10026
+- **Unicode:** U+272A
+- **Full Pattern:** `^(?<kind>[⛧-⛮])(?<expression>.+?)$`
+- **Fast Pattern:** `[⛧-⛮].+?`
 - **Debug Full Pattern:** `^(?<kind>[ break - break.8 ])(?<expression>.+?)$`
 - **Debug Fast Pattern:** `[ break - break.8 ].+?`
 
 ### BuildExpressionMask
 
-- **Character:** ✢
-- **Code:** 10018
-- **Unicode:** U+2722
+- **Character:** ✫
+- **Code:** 10027
+- **Unicode:** U+272B
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -431,69 +431,69 @@
 
 ### BuildFunctionMask
 
-- **Character:** ✣
-- **Code:** 10019
-- **Unicode:** U+2723
-- **Full Pattern:** `^⛪(?<body>▢)$`
-- **Fast Pattern:** `⛪▢`
+- **Character:** ✬
+- **Code:** 10028
+- **Unicode:** U+272C
+- **Full Pattern:** `^⛠(?<body>▢)$`
+- **Fast Pattern:** `⛠▢`
 - **Debug Full Pattern:** `^ build (?<body> paren )$`
 - **Debug Fast Pattern:** ` build  paren `
 
 ### ClassMask
 
-- **Character:** ✤
-- **Code:** 10020
-- **Unicode:** U+2724
-- **Full Pattern:** `^(?<name>[✏])(?<supers>(?:⚱)?[✏]{0,})(?<members>▢)$`
-- **Fast Pattern:** `[✏](?:⚱)?[✏]{0,}▢`
+- **Character:** ✭
+- **Code:** 10029
+- **Unicode:** U+272D
+- **Full Pattern:** `^(?<name>[✢])(?<supers>(?:⚧)?[✢]{0,})(?<members>▢)$`
+- **Fast Pattern:** `[✢](?:⚧)?[✢]{0,}▢`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ])(?<supers>(?: is )?[ EntityToken ]{0,})(?<members> paren )$`
 - **Debug Fast Pattern:** `[ EntityToken ](?: is )?[ EntityToken ]{0,} paren `
 
 ### CommentMask
 
-- **Character:** ✥
-- **Code:** 10021
-- **Unicode:** U+2725
-- **Full Pattern:** `^⛫(?<text>.*?)$`
-- **Fast Pattern:** `⛫.*?`
+- **Character:** ✮
+- **Code:** 10030
+- **Unicode:** U+272E
+- **Full Pattern:** `^⛡(?<text>.*?)$`
+- **Fast Pattern:** `⛡.*?`
 - **Debug Full Pattern:** `^ // (?<text>.*?)$`
 - **Debug Fast Pattern:** ` // .*?`
 
 ### CommentStatementMask
 
-- **Character:** ✦
-- **Code:** 10022
-- **Unicode:** U+2726
-- **Full Pattern:** `^⛫(?<content>.*?)$`
-- **Fast Pattern:** `⛫.*?`
+- **Character:** ✯
+- **Code:** 10031
+- **Unicode:** U+272F
+- **Full Pattern:** `^⛡(?<content>.*?)$`
+- **Fast Pattern:** `⛡.*?`
 - **Debug Full Pattern:** `^ // (?<content>.*?)$`
 - **Debug Fast Pattern:** ` // .*?`
 
 ### ComplexAssignmentMask
 
-- **Character:** ✧
-- **Code:** 10023
-- **Unicode:** U+2727
-- **Full Pattern:** `^(?<particle>.)(?<operator>[⛐-⛕])(?<value>.+?)$`
-- **Fast Pattern:** `.[⛐-⛕].+?`
+- **Character:** ✰
+- **Code:** 10032
+- **Unicode:** U+2730
+- **Full Pattern:** `^(?<particle>.)(?<operator>[⛆-⛋])(?<value>.+?)$`
+- **Fast Pattern:** `.[⛆-⛋].+?`
 - **Debug Full Pattern:** `^(?<particle>.)(?<operator>[ = - += ])(?<value>.+?)$`
 - **Debug Fast Pattern:** `.[ = - += ].+?`
 
 ### CompoundParticleMask
 
-- **Character:** ✨
-- **Code:** 10024
-- **Unicode:** U+2728
-- **Full Pattern:** `(?<origin>(.[▢▤]{0,}))(?<posts>(⛊[✌✏][▢▤]{0,}){1,})`
+- **Character:** ✱
+- **Code:** 10033
+- **Unicode:** U+2731
+- **Full Pattern:** `(?<origin>([▢✌✢][▢▤]{0,}))(?<posts>(⛀[✌✢][▢▤]{0,}){1,})`
 - **Fast Pattern:** `..+?`
-- **Debug Full Pattern:** `(?<origin>(.[ paren  bracket ]{0,}))(?<posts>( . [ ParticleLiteralToken  EntityToken ][ paren  bracket ]{0,}){1,})`
+- **Debug Full Pattern:** `(?<origin>([ paren  ParticleLiteralToken  EntityToken ][ paren  bracket ]{0,}))(?<posts>( . [ ParticleLiteralToken  EntityToken ][ paren  bracket ]{0,}){1,})`
 - **Debug Fast Pattern:** `..+?`
 
 ### ConstantExpressionMask
 
-- **Character:** ✩
-- **Code:** 10025
-- **Unicode:** U+2729
+- **Character:** ✲
+- **Code:** 10034
+- **Unicode:** U+2732
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -501,9 +501,9 @@
 
 ### ConstantMask
 
-- **Character:** ✪
-- **Code:** 10026
-- **Unicode:** U+272A
+- **Character:** ✳
+- **Code:** 10035
+- **Unicode:** U+2733
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -511,9 +511,9 @@
 
 ### ConstructorFunctionMask
 
-- **Character:** ✫
-- **Code:** 10027
-- **Unicode:** U+272B
+- **Character:** ✴
+- **Code:** 10036
+- **Unicode:** U+2734
 - **Full Pattern:** `^(?<signature>▢)(?<body>▢)$`
 - **Fast Pattern:** `▢▢`
 - **Debug Full Pattern:** `^(?<signature> paren )(?<body> paren )$`
@@ -521,19 +521,19 @@
 
 ### ContinueStatementMask
 
-- **Character:** ✬
-- **Code:** 10028
-- **Unicode:** U+272C
-- **Full Pattern:** `^(?<kind>[⛹-✀])(?<expression>.+?)$`
-- **Fast Pattern:** `[⛹-✀].+?`
+- **Character:** ✵
+- **Code:** 10037
+- **Unicode:** U+2735
+- **Full Pattern:** `^(?<kind>[⛯-⛶])(?<expression>.+?)$`
+- **Fast Pattern:** `[⛯-⛶].+?`
 - **Debug Full Pattern:** `^(?<kind>[ continue - continue.8 ])(?<expression>.+?)$`
 - **Debug Fast Pattern:** `[ continue - continue.8 ].+?`
 
 ### ControlFlowMask
 
-- **Character:** ✭
-- **Code:** 10029
-- **Unicode:** U+272D
+- **Character:** ✶
+- **Code:** 10038
+- **Unicode:** U+2736
 - **Full Pattern:** `^(?<content>.+?)$`
 - **Fast Pattern:** `▢`
 - **Debug Full Pattern:** `^(?<content>.+?)$`
@@ -541,69 +541,69 @@
 
 ### DeclareMask
 
-- **Character:** ✮
-- **Code:** 10030
-- **Unicode:** U+272E
-- **Full Pattern:** `^⚥(?<invariants>[✏]{0,})$`
-- **Fast Pattern:** `⚥[✏]{0,}`
+- **Character:** ✷
+- **Code:** 10039
+- **Unicode:** U+2737
+- **Full Pattern:** `^⚛(?<invariants>[✢]{0,})$`
+- **Fast Pattern:** `⚛[✢]{0,}`
 - **Debug Full Pattern:** `^ declare (?<invariants>[ EntityToken ]{0,})$`
 - **Debug Fast Pattern:** ` declare [ EntityToken ]{0,}`
 
 ### DefaultParameterMask
 
-- **Character:** ✯
-- **Code:** 10031
-- **Unicode:** U+272F
-- **Full Pattern:** `^(?<name>[✏])⛐(?<value>.)$`
-- **Fast Pattern:** `[✏]⛐.`
+- **Character:** ✸
+- **Code:** 10040
+- **Unicode:** U+2738
+- **Full Pattern:** `^(?<name>[✢])⛆(?<value>.)$`
+- **Fast Pattern:** `[✢]⛆.`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) = (?<value>.)$`
 - **Debug Fast Pattern:** `[ EntityToken ] = .`
 
 ### EachMask
 
-- **Character:** ✰
-- **Code:** 10032
-- **Unicode:** U+2730
-- **Full Pattern:** `(?<prefix>.+?)⛩(?<entities>[✏]{0,})(?<body>▢)$`
-- **Fast Pattern:** `.+?⛩[✏]{0,}▢`
+- **Character:** ✹
+- **Code:** 10041
+- **Unicode:** U+2739
+- **Full Pattern:** `(?<prefix>.+?)⛟(?<entities>[✢]{0,})(?<body>▢)$`
+- **Fast Pattern:** `.+?⛟[✢]{0,}▢`
 - **Debug Full Pattern:** `(?<prefix>.+?) each (?<entities>[ EntityToken ]{0,})(?<body> paren )$`
 - **Debug Fast Pattern:** `.+? each [ EntityToken ]{0,} paren `
 
 ### ElseIfStatementMask
 
-- **Character:** ✱
-- **Code:** 10033
-- **Unicode:** U+2731
-- **Full Pattern:** `^⛭⛯(?<condition>.)(?<body>▢)$`
-- **Fast Pattern:** `⛭⛯.▢`
-- **Debug Full Pattern:** `^ else  if (?<condition>.)(?<body> paren )$`
-- **Debug Fast Pattern:** ` else  if . paren `
+- **Character:** ✺
+- **Code:** 10042
+- **Unicode:** U+273A
+- **Full Pattern:** `^⛣⛥(?<condition>[▢])(?<body>▢)$`
+- **Fast Pattern:** `⛣⛥[▢]▢`
+- **Debug Full Pattern:** `^ else  if (?<condition>[ paren ])(?<body> paren )$`
+- **Debug Fast Pattern:** ` else  if [ paren ] paren `
 
 ### ElseStatementMask
 
-- **Character:** ✲
-- **Code:** 10034
-- **Unicode:** U+2732
-- **Full Pattern:** `^⛭(?<body>▢)$`
-- **Fast Pattern:** `⛭▢`
+- **Character:** ✻
+- **Code:** 10043
+- **Unicode:** U+273B
+- **Full Pattern:** `^⛣(?<body>▢)$`
+- **Fast Pattern:** `⛣▢`
 - **Debug Full Pattern:** `^ else (?<body> paren )$`
 - **Debug Fast Pattern:** ` else  paren `
 
 ### EnsureStatementMask
 
-- **Character:** ✳
-- **Code:** 10035
-- **Unicode:** U+2733
-- **Full Pattern:** `^⛮(?<expression>.+?)$`
-- **Fast Pattern:** `⛮.+?`
+- **Character:** ✼
+- **Code:** 10044
+- **Unicode:** U+273C
+- **Full Pattern:** `^⛤(?<expression>.+?)$`
+- **Fast Pattern:** `⛤.+?`
 - **Debug Full Pattern:** `^ ensure (?<expression>.+?)$`
 - **Debug Fast Pattern:** ` ensure .+?`
 
 ### ExpressionStatementMask
 
-- **Character:** ✴
-- **Code:** 10036
-- **Unicode:** U+2734
+- **Character:** ✽
+- **Code:** 10045
+- **Unicode:** U+273D
 - **Full Pattern:** `^(?<expression>.+?)$`
 - **Fast Pattern:** `.+?`
 - **Debug Full Pattern:** `^(?<expression>.+?)$`
@@ -611,9 +611,9 @@
 
 ### FieldMask
 
-- **Character:** ✵
-- **Code:** 10037
-- **Unicode:** U+2735
+- **Character:** ✾
+- **Code:** 10046
+- **Unicode:** U+273E
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -621,19 +621,19 @@
 
 ### FromMask
 
-- **Character:** ✶
-- **Code:** 10038
-- **Unicode:** U+2736
-- **Full Pattern:** `^(?<name>[✏])⚭(?<from>.*?)$`
-- **Fast Pattern:** `[✏]⚭.*?`
+- **Character:** ✿
+- **Code:** 10047
+- **Unicode:** U+273F
+- **Full Pattern:** `^(?<name>[✢])⚣(?<from>.*?)$`
+- **Fast Pattern:** `[✢]⚣.*?`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) from (?<from>.*?)$`
 - **Debug Fast Pattern:** `[ EntityToken ] from .*?`
 
 ### FunctionActivatorMask
 
-- **Character:** ✷
-- **Code:** 10039
-- **Unicode:** U+2737
+- **Character:** ❀
+- **Code:** 10048
+- **Unicode:** U+2740
 - **Full Pattern:** `^(?<content>.+?)$`
 - **Fast Pattern:** `▢`
 - **Debug Full Pattern:** `^(?<content>.+?)$`
@@ -641,9 +641,9 @@
 
 ### FunctionMask
 
-- **Character:** ✸
-- **Code:** 10040
-- **Unicode:** U+2738
+- **Character:** ❁
+- **Code:** 10049
+- **Unicode:** U+2741
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -651,29 +651,29 @@
 
 ### GhostFunctionMask
 
-- **Character:** ✹
-- **Code:** 10041
-- **Unicode:** U+2739
-- **Full Pattern:** `^⚮(?<body>▢)$`
-- **Fast Pattern:** `⚮▢`
+- **Character:** ❂
+- **Code:** 10050
+- **Unicode:** U+2742
+- **Full Pattern:** `^⚤(?<body>▢)$`
+- **Fast Pattern:** `⚤▢`
 - **Debug Full Pattern:** `^ ghost (?<body> paren )$`
 - **Debug Fast Pattern:** ` ghost  paren `
 
 ### IfStatementMask
 
-- **Character:** ✺
-- **Code:** 10042
-- **Unicode:** U+273A
-- **Full Pattern:** `^⛯(?<condition>.)(?<body>▢)(?<elseifs>.+?)(?<else>.)$`
-- **Fast Pattern:** `⛯.▢.+?.`
-- **Debug Full Pattern:** `^ if (?<condition>.)(?<body> paren )(?<elseifs>.+?)(?<else>.)$`
-- **Debug Fast Pattern:** ` if . paren .+?.`
+- **Character:** ❃
+- **Code:** 10051
+- **Unicode:** U+2743
+- **Full Pattern:** `^⛥(?<condition>[▢])(?<body>▢)(?<elseifs>.+?)(?<else>.)$`
+- **Fast Pattern:** `⛥[▢]▢.+?.`
+- **Debug Full Pattern:** `^ if (?<condition>[ paren ])(?<body> paren )(?<elseifs>.+?)(?<else>.)$`
+- **Debug Fast Pattern:** ` if [ paren ] paren .+?.`
 
 ### IndexActivatorMask
 
-- **Character:** ✻
-- **Code:** 10043
-- **Unicode:** U+273B
+- **Character:** ❄
+- **Code:** 10052
+- **Unicode:** U+2744
 - **Full Pattern:** `^(?<content>.+?)$`
 - **Fast Pattern:** `▤`
 - **Debug Full Pattern:** `^(?<content>.+?)$`
@@ -681,49 +681,49 @@
 
 ### InfixedChainMask
 
-- **Character:** ✼
-- **Code:** 10044
-- **Unicode:** U+273C
-- **Full Pattern:** `(?<origin>.)(?<successors>([⛖-⛧].){1,})`
+- **Character:** ❅
+- **Code:** 10053
+- **Unicode:** U+2745
+- **Full Pattern:** `(?<origin>.)(?<successors>([⛌-⛝].){1,})`
 - **Fast Pattern:** `..+?`
 - **Debug Full Pattern:** `(?<origin>.)(?<successors>([ << - - ].){1,})`
 - **Debug Fast Pattern:** `..+?`
 
 ### InfixedParticleMask
 
-- **Character:** ✽
-- **Code:** 10045
-- **Unicode:** U+273D
-- **Full Pattern:** `^(?<operator>[⛖-⛧])(?<particle>.)$`
-- **Fast Pattern:** `[⛖-⛧].`
+- **Character:** ❆
+- **Code:** 10054
+- **Unicode:** U+2746
+- **Full Pattern:** `^(?<operator>[⛌-⛝])(?<particle>.)$`
+- **Fast Pattern:** `[⛌-⛝].`
 - **Debug Full Pattern:** `^(?<operator>[ << - - ])(?<particle>.)$`
 - **Debug Fast Pattern:** `[ << - - ].`
 
 ### ManyOfMask
 
-- **Character:** ✾
-- **Code:** 10046
-- **Unicode:** U+273E
-- **Full Pattern:** `^(?<name>[✏])⚱⚲(?<elements>▢)$`
-- **Fast Pattern:** `[✏]⚱⚲▢`
+- **Character:** ❇
+- **Code:** 10055
+- **Unicode:** U+2747
+- **Full Pattern:** `^(?<name>[✢])⚧⚨(?<elements>▢)$`
+- **Fast Pattern:** `[✢]⚧⚨▢`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is  manyof (?<elements> paren )$`
 - **Debug Fast Pattern:** `[ EntityToken ] is  manyof  paren `
 
 ### MatchesMask
 
-- **Character:** ✿
-- **Code:** 10047
-- **Unicode:** U+273F
-- **Full Pattern:** `⚳$`
-- **Fast Pattern:** `⚳`
+- **Character:** ❈
+- **Code:** 10056
+- **Unicode:** U+2748
+- **Full Pattern:** `⚩$`
+- **Fast Pattern:** `⚩`
 - **Debug Full Pattern:** ` matches $`
 - **Debug Fast Pattern:** ` matches `
 
 ### ObjectTypeExpressionMask
 
-- **Character:** ❀
-- **Code:** 10048
-- **Unicode:** U+2740
+- **Character:** ❉
+- **Code:** 10057
+- **Unicode:** U+2749
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -731,69 +731,59 @@
 
 ### OneOfMask
 
-- **Character:** ❁
-- **Code:** 10049
-- **Unicode:** U+2741
-- **Full Pattern:** `^(?<name>[✏])⚱⚴(?<elements>▢)$`
-- **Fast Pattern:** `[✏]⚱⚴▢`
+- **Character:** ❊
+- **Code:** 10058
+- **Unicode:** U+274A
+- **Full Pattern:** `^(?<name>[✢])⚧⚪(?<elements>▢)$`
+- **Fast Pattern:** `[✢]⚧⚪▢`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is  oneof (?<elements> paren )$`
 - **Debug Fast Pattern:** `[ EntityToken ] is  oneof  paren `
 
 ### OneValueOfMask
 
-- **Character:** ❂
-- **Code:** 10050
-- **Unicode:** U+2742
-- **Full Pattern:** `^(?<name>[✏])⚱⚵(?<elements>▢)$`
-- **Fast Pattern:** `[✏]⚱⚵▢`
+- **Character:** ❋
+- **Code:** 10059
+- **Unicode:** U+274B
+- **Full Pattern:** `^(?<name>[✢])⚧⚫(?<elements>▢)$`
+- **Fast Pattern:** `[✢]⚧⚫▢`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is  onevalueof (?<elements> paren )$`
 - **Debug Fast Pattern:** `[ EntityToken ] is  onevalueof  paren `
 
 ### OriginParticleMask
 
-- **Character:** ❃
-- **Code:** 10051
-- **Unicode:** U+2743
-- **Full Pattern:** `(?<term>(✌|✏|(.+?)))(?<activators>[▢▤]{0,})`
-- **Fast Pattern:** `.[▢▤]{0,}`
-- **Debug Full Pattern:** `(?<term>( ParticleLiteralToken | EntityToken |(.+?)))(?<activators>[ paren  bracket ]{0,})`
-- **Debug Fast Pattern:** `.[ paren  bracket ]{0,}`
+- **Character:** ❌
+- **Code:** 10060
+- **Unicode:** U+274C
+- **Full Pattern:** `(?<term>[▢✌✢])(?<activators>[▢▤]{0,})`
+- **Fast Pattern:** `[▢✌✢][▢▤]{0,}`
+- **Debug Full Pattern:** `(?<term>[ paren  ParticleLiteralToken  EntityToken ])(?<activators>[ paren  bracket ]{0,})`
+- **Debug Fast Pattern:** `[ paren  ParticleLiteralToken  EntityToken ][ paren  bracket ]{0,}`
 
 ### ParameterMask
 
-- **Character:** ❄
-- **Code:** 10052
-- **Unicode:** U+2744
+- **Character:** ❍
+- **Code:** 10061
+- **Unicode:** U+274D
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
 - **Debug Fast Pattern:** ``
 
-### ParenMask
-
-- **Character:** ❅
-- **Code:** 10053
-- **Unicode:** U+2745
-- **Full Pattern:** `^(?<content>.+?)$`
-- **Fast Pattern:** `.+?`
-- **Debug Full Pattern:** `^(?<content>.+?)$`
-- **Debug Fast Pattern:** `.+?`
-
 ### PostParticleMask
 
-- **Character:** ❆
-- **Code:** 10054
-- **Unicode:** U+2746
-- **Full Pattern:** `^⛊(?<term>[✌✏])(?<activators>[▢▤]{0,})$`
-- **Fast Pattern:** `⛊[✌✏][▢▤]{0,}`
+- **Character:** ❎
+- **Code:** 10062
+- **Unicode:** U+274E
+- **Full Pattern:** `^⛀(?<term>[✌✢])(?<activators>[▢▤]{0,})$`
+- **Fast Pattern:** `⛀[✌✢][▢▤]{0,}`
 - **Debug Full Pattern:** `^ . (?<term>[ ParticleLiteralToken  EntityToken ])(?<activators>[ paren  bracket ]{0,})$`
 - **Debug Fast Pattern:** ` . [ ParticleLiteralToken  EntityToken ][ paren  bracket ]{0,}`
 
 ### PropertyMask
 
-- **Character:** ❇
-- **Code:** 10055
-- **Unicode:** U+2747
+- **Character:** ❏
+- **Code:** 10063
+- **Unicode:** U+274F
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -801,49 +791,49 @@
 
 ### RangeExpressionMask
 
-- **Character:** ❈
-- **Code:** 10056
-- **Unicode:** U+2748
-- **Full Pattern:** `^(?<from>.)(?<kind>[⚿⛀])(?<to>.)(?<step>.)$`
-- **Fast Pattern:** `.[⚿⛀]..`
+- **Character:** ❐
+- **Code:** 10064
+- **Unicode:** U+2750
+- **Full Pattern:** `^(?<from>.)(?<kind>[⚵⚶])(?<to>.)(?<step>.)$`
+- **Fast Pattern:** `.[⚵⚶]..`
 - **Debug Full Pattern:** `^(?<from>.)(?<kind>[ til  to ])(?<to>.)(?<step>.)$`
 - **Debug Fast Pattern:** `.[ til  to ]..`
 
 ### RestParameterMask
 
-- **Character:** ❉
-- **Code:** 10057
-- **Unicode:** U+2749
-- **Full Pattern:** `^⛎(?<name>[✏])⚱(?<type>.)$`
-- **Fast Pattern:** `⛎[✏]⚱.`
+- **Character:** ❑
+- **Code:** 10065
+- **Unicode:** U+2751
+- **Full Pattern:** `^⛄(?<name>[✢])⚧(?<type>.)$`
+- **Fast Pattern:** `⛄[✢]⚧.`
 - **Debug Full Pattern:** `^ ... (?<name>[ EntityToken ]) is (?<type>.)$`
 - **Debug Fast Pattern:** ` ... [ EntityToken ] is .`
 
 ### ReturnStatementMask
 
-- **Character:** ❊
-- **Code:** 10058
-- **Unicode:** U+274A
-- **Full Pattern:** `^⛰(?<expression>.+?)$`
-- **Fast Pattern:** `⛰.+?`
+- **Character:** ❒
+- **Code:** 10066
+- **Unicode:** U+2752
+- **Full Pattern:** `^⛦(?<expression>.+?)$`
+- **Fast Pattern:** `⛦.+?`
 - **Debug Full Pattern:** `^ return (?<expression>.+?)$`
 - **Debug Fast Pattern:** ` return .+?`
 
 ### SimpleAssignmentMask
 
-- **Character:** ❋
-- **Code:** 10059
-- **Unicode:** U+274B
-- **Full Pattern:** `^(?<target>[✏]{0,})(?<defer>⚦?)(?<operator>[⛐-⛕])(?<value>.+?)$`
-- **Fast Pattern:** `[✏]{0,}⚦?[⛐-⛕].+?`
+- **Character:** ❓
+- **Code:** 10067
+- **Unicode:** U+2753
+- **Full Pattern:** `^(?<target>[✢]{0,})(?<defer>⚜?)(?<operator>[⛆-⛋])(?<value>.+?)$`
+- **Fast Pattern:** `[✢]{0,}⚜?[⛆-⛋].+?`
 - **Debug Full Pattern:** `^(?<target>[ EntityToken ]{0,})(?<defer> defer ?)(?<operator>[ = - += ])(?<value>.+?)$`
 - **Debug Fast Pattern:** `[ EntityToken ]{0,} defer ?[ = - += ].+?`
 
 ### SpaceBodyMask
 
-- **Character:** ❌
-- **Code:** 10060
-- **Unicode:** U+274C
+- **Character:** ❔
+- **Code:** 10068
+- **Unicode:** U+2754
 - **Full Pattern:** `^(?<members>▢)$`
 - **Fast Pattern:** `▢`
 - **Debug Full Pattern:** `^(?<members> paren )$`
@@ -851,59 +841,59 @@
 
 ### SpaceMask
 
-- **Character:** ❍
-- **Code:** 10061
-- **Unicode:** U+274D
-- **Full Pattern:** `^(?<name>[✏])⚱⚸(?<members>▢)$`
-- **Fast Pattern:** `[✏]⚱⚸▢`
+- **Character:** ❕
+- **Code:** 10069
+- **Unicode:** U+2755
+- **Full Pattern:** `^(?<name>[✢])⚧⚮(?<members>▢)$`
+- **Fast Pattern:** `[✢]⚧⚮▢`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is  space (?<members> paren )$`
 - **Debug Fast Pattern:** `[ EntityToken ] is  space  paren `
 
 ### SpreadExpressionMask
 
-- **Character:** ❎
-- **Code:** 10062
-- **Unicode:** U+274E
-- **Full Pattern:** `^⛎(?<target>.)$`
-- **Fast Pattern:** `⛎.`
+- **Character:** ❖
+- **Code:** 10070
+- **Unicode:** U+2756
+- **Full Pattern:** `^⛄(?<target>.)$`
+- **Fast Pattern:** `⛄.`
 - **Debug Full Pattern:** `^ ... (?<target>.)$`
 - **Debug Fast Pattern:** ` ... .`
 
 ### StableFunctionMask
 
-- **Character:** ❏
-- **Code:** 10063
-- **Unicode:** U+274F
-- **Full Pattern:** `^(?<name>[✏])(?<signature>▢)(?<body>▢)$`
-- **Fast Pattern:** `[✏]▢▢`
+- **Character:** ❗
+- **Code:** 10071
+- **Unicode:** U+2757
+- **Full Pattern:** `^(?<name>[✢])(?<signature>▢)(?<body>▢)$`
+- **Fast Pattern:** `[✢]▢▢`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ])(?<signature> paren )(?<body> paren )$`
 - **Debug Fast Pattern:** `[ EntityToken ] paren  paren `
 
 ### StartFunctionMask
 
-- **Character:** ❐
-- **Code:** 10064
-- **Unicode:** U+2750
-- **Full Pattern:** `^⚹(?<isAnalyzer>⚡?)(?<body>▢)$`
-- **Fast Pattern:** `⚹⚡?▢`
+- **Character:** ❘
+- **Code:** 10072
+- **Unicode:** U+2758
+- **Full Pattern:** `^⚯(?<isAnalyzer>⚗?)(?<body>▢)$`
+- **Fast Pattern:** `⚯⚗?▢`
 - **Debug Full Pattern:** `^ start (?<isAnalyzer> analyzer ?)(?<body> paren )$`
 - **Debug Fast Pattern:** ` start  analyzer ? paren `
 
 ### TernaryExpressionMask
 
-- **Character:** ❑
-- **Code:** 10065
-- **Unicode:** U+2751
-- **Full Pattern:** `^(?<prefix>.)⛍(?<pass>.)⛈(?<fail>.)$`
-- **Fast Pattern:** `.⛍.⛈.`
+- **Character:** ❙
+- **Code:** 10073
+- **Unicode:** U+2759
+- **Full Pattern:** `^(?<prefix>.)⛃(?<pass>.)⚾(?<fail>.)$`
+- **Fast Pattern:** `.⛃.⚾.`
 - **Debug Full Pattern:** `^(?<prefix>.) ? (?<pass>.) : (?<fail>.)$`
 - **Debug Fast Pattern:** `. ? . : .`
 
 ### TestCaseMask
 
-- **Character:** ❒
-- **Code:** 10066
-- **Unicode:** U+2752
+- **Character:** ❚
+- **Code:** 10074
+- **Unicode:** U+275A
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -911,9 +901,9 @@
 
 ### TestGroupMask
 
-- **Character:** ❓
-- **Code:** 10067
-- **Unicode:** U+2753
+- **Character:** ❛
+- **Code:** 10075
+- **Unicode:** U+275B
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -921,19 +911,19 @@
 
 ### ThrowStatementMask
 
-- **Character:** ❔
-- **Code:** 10068
-- **Unicode:** U+2754
-- **Full Pattern:** `^⚾(?<expression>.+?)$`
-- **Fast Pattern:** `⚾.+?`
+- **Character:** ❜
+- **Code:** 10076
+- **Unicode:** U+275C
+- **Full Pattern:** `^⚴(?<expression>.+?)$`
+- **Fast Pattern:** `⚴.+?`
 - **Debug Full Pattern:** `^ throw (?<expression>.+?)$`
 - **Debug Fast Pattern:** ` throw .+?`
 
 ### TypeExpressionMask
 
-- **Character:** ❕
-- **Code:** 10069
-- **Unicode:** U+2755
+- **Character:** ❝
+- **Code:** 10077
+- **Unicode:** U+275D
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -941,9 +931,9 @@
 
 ### TypeIntersectionExpressionMask
 
-- **Character:** ❖
-- **Code:** 10070
-- **Unicode:** U+2756
+- **Character:** ❞
+- **Code:** 10078
+- **Unicode:** U+275E
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -951,9 +941,9 @@
 
 ### TypeUnionExpressionMask
 
-- **Character:** ❗
-- **Code:** 10071
-- **Unicode:** U+2757
+- **Character:** ❟
+- **Code:** 10079
+- **Unicode:** U+275F
 - **Full Pattern:** `(no pattern)`
 - **Fast Pattern:** ``
 - **Debug Full Pattern:** ``
@@ -961,50 +951,50 @@
 
 ### TypedDefaultParameterMask
 
-- **Character:** ❘
-- **Code:** 10072
-- **Unicode:** U+2758
-- **Full Pattern:** `^(?<name>[✏])⚱(?<type>.)⛐(?<value>.)$`
-- **Fast Pattern:** `[✏]⚱.⛐.`
+- **Character:** ❠
+- **Code:** 10080
+- **Unicode:** U+2760
+- **Full Pattern:** `^(?<name>[✢])⚧(?<type>.)⛆(?<value>.)$`
+- **Fast Pattern:** `[✢]⚧.⛆.`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is (?<type>.) = (?<value>.)$`
 - **Debug Fast Pattern:** `[ EntityToken ] is . = .`
 
 ### TypedOptionalParameterMask
 
-- **Character:** ❙
-- **Code:** 10073
-- **Unicode:** U+2759
-- **Full Pattern:** `^(?<name>[✏])⚱(?<type>.)⛐⛍$`
-- **Fast Pattern:** `[✏]⚱.⛐⛍`
+- **Character:** ❡
+- **Code:** 10081
+- **Unicode:** U+2761
+- **Full Pattern:** `^(?<name>[✢])⚧(?<type>.)⛆⛃$`
+- **Fast Pattern:** `[✢]⚧.⛆⛃`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is (?<type>.) =  ? $`
 - **Debug Fast Pattern:** `[ EntityToken ] is . =  ? `
 
 ### TypedParameterMask
 
-- **Character:** ❚
-- **Code:** 10074
-- **Unicode:** U+275A
-- **Full Pattern:** `^(?<name>[✏])⚱(?<type>.)$`
-- **Fast Pattern:** `[✏]⚱.`
+- **Character:** ❢
+- **Code:** 10082
+- **Unicode:** U+2762
+- **Full Pattern:** `^(?<name>[✢])⚧(?<type>.)$`
+- **Fast Pattern:** `[✢]⚧.`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is (?<type>.)$`
 - **Debug Fast Pattern:** `[ EntityToken ] is .`
 
 ### WorkerMask
 
-- **Character:** ❛
-- **Code:** 10075
-- **Unicode:** U+275B
-- **Full Pattern:** `^(?<name>[✏])⚱⛄(?<options>▢)$`
-- **Fast Pattern:** `[✏]⚱⛄▢`
+- **Character:** ❣
+- **Code:** 10083
+- **Unicode:** U+2763
+- **Full Pattern:** `^(?<name>[✢])⚧⚺(?<options>▢)$`
+- **Fast Pattern:** `[✢]⚧⚺▢`
 - **Debug Full Pattern:** `^(?<name>[ EntityToken ]) is  worker (?<options> paren )$`
 - **Debug Fast Pattern:** `[ EntityToken ] is  worker  paren `
 
 ### YieldStatementMask
 
-- **Character:** ❜
-- **Code:** 10076
-- **Unicode:** U+275C
-- **Full Pattern:** `^(?<kind>[✁-✈])(?<expression>.+?)$`
-- **Fast Pattern:** `[✁-✈].+?`
+- **Character:** ❤
+- **Code:** 10084
+- **Unicode:** U+2764
+- **Full Pattern:** `^(?<kind>[⛷-⛾])(?<expression>.+?)$`
+- **Fast Pattern:** `[⛷-⛾].+?`
 - **Debug Full Pattern:** `^(?<kind>[ yield - yield.8 ])(?<expression>.+?)$`
 - **Debug Fast Pattern:** `[ yield - yield.8 ].+?`

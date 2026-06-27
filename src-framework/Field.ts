@@ -31,7 +31,7 @@ export class Field
 	/** */
 	readonly data = {
 		nullableTokens: [] as X.FixedToken[],
-		enclosure: X.TapeKind.none as X.TapeKind,
+		enclosure: X.Enclosure.none as X.Enclosure,
 		terminal: false,
 		sink: false,
 		
@@ -58,49 +58,49 @@ export class Field
 	/** Indicates that this field is expected to be wrapped in a paren() delimiter. */
 	paren(): this
 	{
-		this.data.enclosure = X.TapeKind.paren;
+		this.data.enclosure = X.Enclosure.paren;
 		return this;
 	}
 	
 	/** */
 	brace(): this
 	{
-		this.data.enclosure = X.TapeKind.brace;
+		this.data.enclosure = X.Enclosure.brace;
 		return this;
 	}
 	
 	/** */
 	bracket(): this
 	{
-		this.data.enclosure = X.TapeKind.bracket;
+		this.data.enclosure = X.Enclosure.bracket;
 		return this;
 	}
 	
 	/** */
 	quote(): this
 	{
-		this.data.enclosure = X.TapeKind.quote;
+		this.data.enclosure = X.Enclosure.quote;
 		return this;
 	}
 	
 	/** */
 	fence(): this
 	{
-		this.data.enclosure = X.TapeKind.fence;
+		this.data.enclosure = X.Enclosure.fence;
 		return this;
 	}
 	
 	/** */
 	markup(): this
 	{
-		this.data.enclosure = X.TapeKind.markup;
+		this.data.enclosure = X.Enclosure.markup;
 		return this;
 	}
 	
 	/** */
 	substitution(): this
 	{
-		this.data.enclosure = X.TapeKind.substitution;
+		this.data.enclosure = X.Enclosure.substitution;
 		return this;
 	}
 }
@@ -252,22 +252,6 @@ export interface IHasField extends Field
 {
 	kind: "has";
 	match: readonly X.FixedToken[];
-}
-
-//# Expressionable
-
-/** */
-export type TExpressionable = 
-	typeof X.EntityToken | 
-	typeof X.LiteralToken |
-	X.ExpressionMasks;
-
-/**
- * Shortcut function, because this particular sequence is used pervasively.
- */
-export function expressionable()
-{
-	return X.one(X.EntityToken, X.LiteralToken, ...X.ExpressionMasks);
 }
 
 //# Field Helpers (Structural)

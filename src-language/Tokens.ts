@@ -1,43 +1,4 @@
-import * as X from "./X.ts";
-
-//# Base Classes
-
-//# Flex Token Types
-
-export abstract class FlexDelimiterToken extends X.FlexToken { }
-
-export class MarkupOpenToken extends FlexDelimiterToken
-{
-	static readonly pattern = /<[A-Za-z][A-Za-z0-9_]{0,}/u;
-}
-export class MarkupStartToken extends FlexDelimiterToken
-{
-	static readonly pattern = /<[A-Za-z][A-Za-z0-9_]{0,}>/u;
-}
-export class MarkupEndToken extends FlexDelimiterToken
-{
-	static readonly pattern = /<\/[A-Za-z][A-Za-z0-9_]{0,}>/u;
-}
-export class MarkupAttrStartToken extends FlexDelimiterToken
-{
-	static readonly pattern = /[A-Za-z0-9]+=/u;
-}
-
-export abstract class WhitespaceToken extends X.FlexToken { }
-
-export class SpaceToken extends WhitespaceToken
-{
-	static readonly pattern = /[ \t]{1}[ \t]*/u;
-}
-export class NewlineToken extends WhitespaceToken
-{
-	static readonly pattern = /\r?\n/u;
-}
-
-export class EntityToken extends X.FlexToken
-{ 
-	static readonly pattern = /[a-zA-Z]{1,}[a-zA-Z0-9_]{0,}/u;
-}
+import * as X from "./XX.ts";
 
 export abstract class LiteralToken extends X.FlexToken { }
 
@@ -98,7 +59,7 @@ export class RegexToken extends ParticleLiteralToken
 }
 
 export const flexTokens = Object.freeze({
-	entity: EntityToken,
+	entity: X.EntityToken,
 	
 	// Literals - Particles
 	quantity: QuantityToken,
@@ -115,22 +76,22 @@ export const flexTokens = Object.freeze({
 	integer: IntegerToken,
 	
 	// Markup
-	markupOpen: MarkupOpenToken,
-	markupStart: MarkupStartToken,
-	markupEnd: MarkupEndToken,
-	markupAttrStart: MarkupAttrStartToken,
+	markupOpen: X.MarkupOpenToken,
+	markupStart: X.MarkupStartToken,
+	markupEnd: X.MarkupEndToken,
+	markupAttrStart: X.MarkupAttrStartToken,
 	
 	// White space
-	space: SpaceToken,
-	newline: NewlineToken,
+	space: X.SpaceToken,
+	newline: X.NewlineToken,
 });
 
 /** */
 export const flexTokensAbstract = Object.freeze({
 	literal: LiteralToken,
 	particle: ParticleLiteralToken,
-	whitespace: WhitespaceToken,
-	delimiter: FlexDelimiterToken, 
+	whitespace: X.WhitespaceToken,
+	delimiter: X.FlexDelimiterToken, 
 });
 
 //# Fixed Token Types
@@ -540,54 +501,28 @@ const yields = Object.freeze({
 	yield8: new X.FixedToken("yield.8"),
 });
 
-const delimiters = Object.freeze({
-	// Fixed
-	parenTapeL: new X.FixedToken("("),
-	parenTapeR: new X.FixedToken(")"),
-	bracketTapeL: new X.FixedToken("["),
-	bracketTapeR: new X.FixedToken("]"),
-	braceTapeL: new X.FixedToken("{"),
-	braceTapeR: new X.FixedToken("}"),
-	quoteTape: new X.FixedToken(`"`),
-	fenceTape: new X.FixedToken(`"""`),
-	substitutionTapeL: new X.FixedToken("(("),
-	substitutionTapeR: new X.FixedToken("))"),
-	
-	// Flex
-	//MarkupOpenToken: MarkupOpenToken,
-	//MarkupStartToken: MarkupStartToken,
-	//MarkupEndToken: MarkupEndToken,
-	//MarkupAttrStartToken: MarkupAttrStartToken,
-});
-
-const contextual = Object.freeze({
-	markupClose: new X.FixedToken(">"),
-	markupIslandClose: new X.FixedToken("/>"),
+/** */
+export const tokenGroups = Object.freeze({
+	primitives,
+	words,
+	values,
+	symbols,
+	assigners,
+	operators,
+	breaks,
+	continues,
+	yields,
+	suffixes,
+	prefixes,
 });
 
 /** */
 export const tokens = Object.freeze({
-	only: Object.freeze({
-		primitives,
-		delimiters,
-		words,
-		values,
-		symbols,
-		assigners,
-		operators,
-		breaks,
-		continues,
-		yields,
-		suffixes,
-		prefixes,
-		contextual,
-	}),
 	...primitives.ints,
 	...primitives.uints,
 	...primitives.floats,
 	...primitives.bigs,
 	...primitives.others,
-	...delimiters,
 	...words,
 	...values,
 	...symbols,
@@ -599,16 +534,7 @@ export const tokens = Object.freeze({
 	...breaks,
 	...continues,
 	...yields,
-	...contextual,
 });
-
-/** */
-export function * eachFixedToken()
-{
-	for (const value of Object.values(tokens))
-		if (value !== tokens.only)
-			yield value as X.FixedToken;
-}
 
 /** Stores the tokens that have no whitespace around them when printed. */
 export const unspacedOperators: readonly X.FixedToken[] = [

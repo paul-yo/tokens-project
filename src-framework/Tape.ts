@@ -28,16 +28,20 @@ export interface ITapeNavigationCursor extends X.ITapeCursor
 export class Tape
 {
 	/** */
-	constructor(kind: X.TapeKind = X.TapeKind.none)
+	constructor(fragmenter: X.FixedToken, enclosure: X.Enclosure = X.Enclosure.none)
 	{
-		this.kind = kind;
+		this.fragmenter = fragmenter;
+		this.enclosure = enclosure;
 	}
 	
 	/** */
 	readonly lamport: number = 0;
 	
 	/***/
-	readonly kind: X.TapeKind;
+	readonly enclosure: X.Enclosure;
+	
+	/** */
+	private readonly fragmenter: X.FixedToken;
 	
 	/** */
 	private readonly fragments: X.Fragment[] = [];
@@ -97,7 +101,7 @@ export class Tape
 				}
 				
 				// Fragment delimiter: comma
-				if (token === X.tokens.comma)
+				if (token === this.fragmenter)
 					break;
 				
 				// Fragment delimiter: newline + indent check

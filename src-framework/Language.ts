@@ -1,0 +1,147 @@
+import * as X from "./X.ts";
+import moo from "moo";
+
+// This file is intended to be the main entry point 
+// for the "framework" side of this project.
+
+/**
+ * Refers to the structure of a table of flex tokens which
+ * are used throughout the system and in language specs.
+ */
+export type TFlexTokenTable = Record<string, typeof X.FlexToken>;
+
+/** */
+export interface ILanguageSpec
+{
+	masks: typeof X.Mask[];
+	fragmentationToken: X.FixedToken;
+	fixedTokens: X.FixedToken[];
+	physicalFlexTokens: TFlexTokenTable;
+	abstractFlexTokens: TFlexTokenTable;
+}
+
+/** */
+export function createLanguage(spec: ILanguageSpec)
+{
+	// This is cheating like *crazy* but it's the best we have right now.
+	// This is the stuff from the Relocants file that we need to generalize
+	// at some point, and when that happens we won't need to hack this
+	// stuff into the tokens contains in the spec.
+	
+	spec.fixedTokens = [
+		...spec.fixedTokens,
+		...Object.values(X.delimiters),
+		...Object.values(X.delimitersForMarkup)
+	];
+	
+	spec.physicalFlexTokens = Object.assign(
+		{},
+		spec.physicalFlexTokens,
+		{
+			entityToken: X.EntityToken,
+			spaceToken: X.SpaceToken,
+			newlineToken: X.NewlineToken,
+			markupOpenToken: X.MarkupOpenToken,
+			markupStartToken: X.MarkupStartToken,
+			markupEndToken: X.MarkupEndToken,
+			markupAttrStartToken: X.MarkupAttrStartToken,
+		});
+	
+	spec.abstractFlexTokens = Object.assign(
+		{},
+		spec.abstractFlexTokens,
+		{
+			whitespaceToken: X.WhitespaceToken,
+			flexDelimiterToken: X.FlexDelimiterToken,
+		}
+	);
+	
+	X.registerFlexTokens(spec.physicalFlexTokens, spec.abstractFlexTokens);
+	const lexer = createLanguageLexer(spec);
+	createLanguageProxies(spec);
+	X.MaskSchema.compile(spec);
+	
+	return new class Language
+	{
+		/** */
+		constructor(lexer: moo.Lexer, spec: ILanguageSpec)
+		{
+			this.lexer = lexer;
+			this.spec = spec;
+		}
+		
+		private lexer: moo.Lexer;
+		private spec: ILanguageSpec;
+		
+		/** Creates a hierarchial tape */
+		createTape(codeText: string)
+		{
+			this.lexer.reset(codeText);
+			const mooTokens = Array.from(this.lexer);
+			const textTokens = mooTokens.map(s => s.text);
+			const parser = new X.TapeParser(textTokens, this.spec);
+			return parser.parse();
+		}
+		
+	}(lexer, spec);
+}
+
+/** */
+function createLanguageLexer(spec: ILanguageSpec)
+{
+	const rules: moo.Rules = {};
+	const words: Record<string, string> = {};
+	
+	for (const delimiter of Object.values(X.delimiters))
+		rules[delimiter.text] = delimiter.text;
+	
+	for (const fixedToken of spec.fixedTokens)
+	{
+		if (X.EntityToken.pattern.test(fixedToken.text))
+			words[fixedToken.text] = fixedToken.text;
+		else
+			rules[fixedToken.text] = fixedToken.text;
+	}
+	
+	for (const flex of Object.values(spec.physicalFlexTokens))
+		if (flex.pattern)
+			rules[flex.name] = flex.pattern;
+	
+	// Entities and newline tokens need to be special-cased for the moo lexer
+	// TODO: This needs to be generalized 
+	
+	const kw = moo.keywords(words);
+	
+	rules[X.EntityToken.name] = {
+		match: X.EntityToken.pattern,
+		type: kw,
+	};
+	
+	rules[X.NewlineToken.name] = {
+		match: X.NewlineToken.pattern,
+		lineBreaks: true,
+	};
+	
+	return moo.compile(rules);
+}
+
+/** Initializes the set of unicode proxy characters for the language. */
+function createLanguageProxies(spec: ILanguageSpec)
+{
+	X.Proxy.define(X.RawToken);
+	
+	for (const enclosure of Object.values(X.Enclosure))
+		X.Proxy.define(enclosure);
+	
+	for (const fixed of spec.fixedTokens)
+		X.Proxy.define(fixed);
+	
+	for (const abstractFlexType of Object.values(spec.abstractFlexTokens))
+		X.Proxy.define(abstractFlexType);
+	
+	for (const flexType of Object.values(spec.physicalFlexTokens))
+		X.Proxy.define(flexType);
+	
+	for (const maskType of spec.masks)
+		X.Proxy.define(maskType);
+}

@@ -258,21 +258,13 @@ export class Fragment
 			// If maybeMaskIndex is the sentinel, then it's not
 			// a mask index and the index refers to a token
 			if (maybeMaskIndex === TOKEN_SENTINEL)
-			{
-				const token = this.tokens[index];
-				if (token instanceof X.WhitespaceToken)
-					throw "Unknown state";
-				
-				yield token;
-			}
-			else
-			{
-				// Skip over duplicate non-sentinel indexes because
-				// these are the physical index of the same mask
-				// and we don't want to yield it multiple times.
-				if (maybeMaskIndex !== this.indexes[index - 1])
-					yield this.masks[maybeMaskIndex];
-			}
+				yield this.tokens[index];
+			
+			// Skip over duplicate non-sentinel indexes because
+			// these are the physical index of the same mask
+			// and we don't want to yield it multiple times.
+			else if (maybeMaskIndex !== this.indexes[index - 1])
+				yield this.masks[maybeMaskIndex];
 		}
 	}
 	
@@ -288,12 +280,8 @@ export class Fragment
 			
 			if (maybeMaskIndex === TOKEN_SENTINEL)
 			{
-				const token = this.tokens[index];
-				if (token instanceof X.WhitespaceToken)
-					throw "Unknown state";
-				
 				yield {
-					token,
+					token: this.tokens[index],
 					mask: null,
 					tokensCovered: null
 				};

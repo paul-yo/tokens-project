@@ -1,4 +1,4 @@
-import * as X from "./X.ts";
+import * as X from "./XX.ts";
 
 //# Reusable
 
@@ -21,7 +21,7 @@ export class ControlFlowMask extends X.EnclosureMask
 	readonly content: (X.StatementMasks | X.ExpressionMasks)[] = X.unset;
 	
 	enclosureSchema() { return {
-		enclosure: X.TapeKind.paren,
+		enclosure: X.Enclosure.paren,
 		content: X.many(...X.StatementMasks, ...X.ExpressionMasks),
 	}}
 }
@@ -674,7 +674,7 @@ export class FunctionActivatorMask extends X.EnclosureMask
 	readonly content: X.ExpressionMasks[] = X.unset;
 	
 	enclosureSchema() { return {
-		enclosure: X.TapeKind.paren,
+		enclosure: X.Enclosure.paren,
 		content: X.many(...X.ExpressionMasks),
 	}}
 }
@@ -685,7 +685,7 @@ export class IndexActivatorMask extends X.EnclosureMask
 	readonly content: X.ExpressionMasks = X.unset;
 	
 	enclosureSchema() { return {
-		enclosure: X.TapeKind.bracket,
+		enclosure: X.Enclosure.bracket,
 		content: X.many(...X.ExpressionMasks),
 	}}
 }

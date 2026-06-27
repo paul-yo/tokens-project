@@ -1,62 +1,62 @@
-import * as X from "./X.ts";
+import * as X from "./XX.ts";
 
 /** */
 export const VisibilityKind = {
-	exempt: X.tokens.only.words.exempt,
-	extend: X.tokens.only.words.extend,
-	expose: X.tokens.only.words.expose,
-	export: X.tokens.only.words.export,
+	exempt: X.tokenGroups.words.exempt,
+	extend: X.tokenGroups.words.extend,
+	expose: X.tokenGroups.words.expose,
+	export: X.tokenGroups.words.export,
 } as const;
 export type VisibilityKind = (typeof VisibilityKind)[keyof typeof VisibilityKind];
 
 /** */
-export const AssignerKind = { ...X.tokens.only.assigners } as const;
+export const AssignerKind = { ...X.tokenGroups.assigners } as const;
 export type AssignerKind = (typeof AssignerKind)[keyof typeof AssignerKind];
 
 /** */
 export const RangeKind = {
-	to: X.tokens.only.words.to,
-	til: X.tokens.only.words.til,
+	to: X.tokenGroups.words.to,
+	til: X.tokenGroups.words.til,
 } as const;
 export type RangeKind = (typeof RangeKind)[keyof typeof RangeKind];
 
 /** */
 export const ComparisonKind = {
-	equality: X.tokens.only.operators.sealed.equality,
-	inequality: X.tokens.only.operators.sealed.inequality,
-	gt: X.tokens.only.operators.overloadable.gt,
-	gte: X.tokens.only.operators.overloadable.gte,
-	lt: X.tokens.only.operators.overloadable.lt,
-	lte: X.tokens.only.operators.overloadable.lte,
+	equality: X.tokenGroups.operators.sealed.equality,
+	inequality: X.tokenGroups.operators.sealed.inequality,
+	gt: X.tokenGroups.operators.overloadable.gt,
+	gte: X.tokenGroups.operators.overloadable.gte,
+	lt: X.tokenGroups.operators.overloadable.lt,
+	lte: X.tokenGroups.operators.overloadable.lte,
 } as const;
 export type ComparisonKind = (typeof ComparisonKind)[keyof typeof ComparisonKind];
 
 /** */
 export const AttestationKind = {
-	is: X.tokens.only.words.is,
-	isnot: X.tokens.only.words.isnot,
+	is: X.tokenGroups.words.is,
+	isnot: X.tokenGroups.words.isnot,
 } as const;
 export type AttestationKind = (typeof AttestationKind)[keyof typeof AttestationKind];
 
 /** */
 export const InfixOperatorKind = {
-	...X.tokens.only.operators.sealed,
-	...X.tokens.only.operators.overloadable,
+	...X.tokenGroups.operators.sealed,
+	...X.tokenGroups.operators.overloadable,
 } as const;
 export type InfixOperatorKind = (typeof InfixOperatorKind)[keyof typeof InfixOperatorKind];
 
 //# Statement prefixes
 
 /** */
-export const BreakKind = X.tokens.only.breaks;
+export const BreakKind = X.tokenGroups.breaks;
 export type BreakKind = (typeof BreakKind)[keyof typeof BreakKind];
 
 /** */
-export const ContinueKind = X.tokens.only.continues;
+export const ContinueKind = X.tokenGroups.continues;
 export type ContinueKind = (typeof ContinueKind)[keyof typeof ContinueKind];
 
 /** */
-export const YieldKind = X.tokens.only.yields;
+export const YieldKind = X.tokenGroups.yields;
 export type YieldKind = (typeof YieldKind)[keyof typeof YieldKind];
 
 //# Worker related

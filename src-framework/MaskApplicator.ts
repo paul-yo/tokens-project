@@ -5,9 +5,9 @@ type TMatchableField = X.IOneField | X.ILassoField | X.IManyField | X.ISomeField
 /**
  * Attempts to apply the apex masks over the specified tape.
  */
-export function applyApexMasks(tape: X.Tape)
+export function applyApexMasks(tape: X.Tape, masks: readonly typeof X.Mask[])
 {
-	const apexCandidates = X.SpaceBodyMasks.map(m => m.schema);
+	const apexCandidates = masks.map(m => m.schema);
 	return applyMasks(tape, apexCandidates);
 }
 
@@ -175,7 +175,7 @@ function getFieldValue(tapeLike: X.TapeLike, field: X.TField, depth = 0)
 	// and if the tape matched then how do we not have an enclosure in the
 	// expected location?
 	let unwrapped = false;
-	if (field.data.enclosure !== X.TapeKind.none)
+	if (field.data.enclosure !== X.Enclosure.none)
 	{
 		// If the first element of the tape isn't another tape,
 		// then there is nothing to recurse into so just quit.
@@ -185,7 +185,7 @@ function getFieldValue(tapeLike: X.TapeLike, field: X.TField, depth = 0)
 		
 		// If the enclosure of the tape we're looking at doesn't match
 		// the enclosure that's required then quit.
-		if (innerTape.kind !== field.data.enclosure)
+		if (innerTape.enclosure !== field.data.enclosure)
 			return null;
 	
 		tapeLike = innerTape;

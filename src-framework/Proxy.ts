@@ -3,7 +3,7 @@ import * as X from "./X.ts";
 /** */
 export type TProxyable = 
 	X.TapeElement | 
-	X.TapeKind |
+	X.Enclosure |
 	X.Mask |
 	typeof X.RawToken |
 	typeof X.FlexToken | 
@@ -46,9 +46,9 @@ export const Proxy = new class
 			proxy = this.charProxyMap.get(X.RawToken);
 		
 		else if (proxyable instanceof X.Tape)
-			proxy = this.charProxyMap.get(proxyable.kind);
+			proxy = this.charProxyMap.get(proxyable.enclosure);
 		
-		else if (X.isTapeKind(proxyable))
+		else if (X.isEnclosure(proxyable))
 			proxy = this.charProxyMap.get(proxyable);
 		
 		else if (X.Mask.isType(proxyable))
@@ -108,8 +108,8 @@ export const Proxy = new class
 					if (proxyable instanceof X.RawToken)
 						return X.RawToken.name;
 					
-					if (X.isTapeKind(proxyable))
-						return proxyable.kind.replace("TapeKind.", "");
+					if (X.isEnclosure(proxyable))
+						return proxyable.kind.split(".").at(-1) || "?";
 					
 					if (X.Mask.isType(proxyable))
 						return proxyable.name;

@@ -5,14 +5,14 @@ export type TMaskOptions = {
 	[schemaOptions]?: {
 		sparse?: boolean,
 		suffix?: boolean,
-		enclosure?: X.TapeKind,
+		enclosure?: X.Enclosure,
 	}
 };
 
 export type TMaskFields = { [K: string]: X.TField };
 export type TMaskSchemaObject = TMaskOptions & TMaskFields;
 export type TMaskEnclosureSchemaObject = {
-	enclosure: X.TapeKind,
+	enclosure: X.Enclosure,
 	content: X.IManyField | X.IOneField
 };
 
@@ -29,20 +29,6 @@ const maskBrand = Symbol("maskBrand");
 /** */
 export abstract class Mask
 {
-	/**
-	 * Does a module-wide scan for all mask types and returns them.
-	 */
-	static eachType(): typeof X.Mask[]
-	{
-		return Object.values(X).filter(val =>
-			typeof val === "function" && 
-			maskBrand in val &&
-			val !== X.Mask &&
-			val !== X.EnclosureMask
-		);
-	}
-	private static readonly [maskBrand] = true;
-	
 	/**
 	 * Gets or sets the MaskSchema associated with the mask.
 	 */
@@ -64,6 +50,7 @@ export abstract class Mask
 	{
 		return typeof value === "function" && value[maskBrand] === true;
 	}
+	private static readonly [maskBrand] = true;
 	
 	/** */
 	static get isEnclosureMask() { return false; }
@@ -204,7 +191,7 @@ export abstract class EnclosureMask extends X.Mask
 	enclosureSchema(): TMaskEnclosureSchemaObject
 	{
 		return { 
-			enclosure: X.TapeKind.none,
+			enclosure: X.Enclosure.none,
 			content: X.many(),
 		};
 	}

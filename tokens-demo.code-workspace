@@ -18,7 +18,7 @@
 				"type": "node",
 				"request": "launch",
 				"name": "Debug Project",
-				"program": "src/index.ts",
+				"program": "src-language/index.ts",
 				"skipFiles": [
 					"<node_internals>/**"
 				],

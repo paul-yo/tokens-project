@@ -4,17 +4,19 @@ import * as X from "./X.ts";
 export class TapeParser
 {
 	/** */
-	constructor(tokens: readonly string[])
+	constructor(tokens: readonly string[], spec: X.ILanguageSpec)
 	{
 		this.stream = tokens;
+		this.spec = spec;
 		
 		const allTokens = new Map<string, X.FixedToken>();
-		for (const token of X.eachFixedToken())
+		for (const token of spec.fixedTokens)
 			allTokens.set(token.text, token);
 		
 		this.allTokens = allTokens;
 	}
 	
+	private readonly spec: X.ILanguageSpec;
 	private index = 0;
 	private readonly stream: readonly string[];
 	private readonly allTokens: ReadonlyMap<string, X.FixedToken>;
@@ -34,9 +36,15 @@ export class TapeParser
 	}
 	
 	/** */
+	private createTape(enclosure?: X.Enclosure)
+	{
+		return new X.Tape(this.spec.fragmentationToken, enclosure);
+	}
+	
+	/** */
 	parse()
 	{
-		const tape = new X.Tape();
+		const tape = this.createTape();
 		
 		while (this.index < this.stream.length)
 		{
@@ -49,87 +57,67 @@ export class TapeParser
 	}
 	
 	/** */
-	parseAny(): X.TapeElement
+	private parseAny(): X.TapeElement
 	{
 		const token = this.read();
 		
 		switch (token)
 		{
-			case X.tokens.parenTapeL.text:
-				return this.parseToDelimiter(new X.Tape(X.TapeKind.paren), X.tokens.parenTapeR);
+			case X.delimiters.parenTapeL.text:
+				return this.parseToDelimiter(X.Enclosure.paren);
 				
-			case X.tokens.bracketTapeL.text:
-				return this.parseToDelimiter(new X.Tape(X.TapeKind.bracket), X.tokens.bracketTapeR);
+			case X.delimiters.bracketTapeL.text:
+				return this.parseToDelimiter(X.Enclosure.bracket);
 			
-			case X.tokens.braceTapeL.text:
-				return this.parseToDelimiter(new X.Tape(X.TapeKind.brace), X.tokens.braceTapeR);
+			case X.delimiters.braceTapeL.text:
+				return this.parseToDelimiter(X.Enclosure.brace);
 			
-			case X.tokens.quoteTape.text:
+			case X.delimiters.quoteTape.text:
 			{
-				const tape = new X.Tape(X.TapeKind.quote);
-				tape.append(this.parseTextual(X.tokens.quoteTape));
+				const tape = this.createTape(X.Enclosure.quote);
+				tape.append(this.parseTextual(X.delimiters.quoteTape));
 				return tape;
 			}
-			case X.tokens.fenceTape.text:
+			case X.delimiters.fenceTape.text:
 			{
-				const tape = new X.Tape(X.TapeKind.fence);
-				tape.append(this.parseTextual(X.tokens.fenceTape));
+				const tape = this.createTape(X.Enclosure.fence);
+				tape.append(this.parseTextual(X.delimiters.fenceTape));
 				return tape;
 			}
-			case X.tokens.substitutionTapeL.text:
-				return this.parseToDelimiter(new X.Tape(X.TapeKind.substitution), X.tokens.substitutionTapeR);
-			
-			case X.tokens.from.text:
-			{
-				console.log(
-					"Verify that this works and retains trailing, " +
-					"leading, and duplicated space characters.");
-				
-				debugger;
-				
-				const parts: string[] = [];
-				while (this.index < this.stream.length)
-				{
-					const peek = this.stream[this.index];
-					if (peek === "\n" || peek === "\r" || peek === "\r\n")
-						break;
-					
-					parts.push(peek);
-					this.index++;
-				}
-				
-				return X.RawToken.new(parts.join(" "));
-			}
+			case X.delimiters.substitutionTapeL.text:
+				return this.parseToDelimiter(X.Enclosure.substitution);
 		}
 		
 		const existing = this.allTokens.get(token);
 		if (existing)
 			return existing;
 		
-		if (token === X.tokens.parenTapeR.text ||
-			token === X.tokens.bracketTapeR.text ||
-			token === X.tokens.braceTapeR.text ||
-			token === X.tokens.substitutionTapeR.text)
+		if (token === X.delimiters.parenTapeR.text ||
+			token === X.delimiters.bracketTapeR.text ||
+			token === X.delimiters.braceTapeR.text ||
+			token === X.delimiters.substitutionTapeR.text)
 			return this.allTokens.get(token)!;
 		
 		const maybeMarkup = this.tryParseMarkup(token);
 		if (maybeMarkup !== null)
 			return maybeMarkup;
 		
-		for (const flex of Object.values(X.flexTokens))
-			if (flex.pattern.test(token))
+		for (const flex of Object.values(this.spec.physicalFlexTokens))
+			if (flex.pattern?.test(token))
 				return (flex as any).new(token);
-			
+		
 		throw `Unknown state - Cannot parse "${token}"`;
 	}
 	
 	/** */
-	private parseToDelimiter(tape: X.Tape, delimiter: X.FixedToken)
+	private parseToDelimiter(enclosure: X.Enclosure)
 	{
+		const tape = new X.Tape(this.spec.fragmentationToken, enclosure);
+		
 		for (;;)
 		{
 			const result = this.parseAny();
-			if (result === delimiter)
+			if (result === tape.enclosure.right)
 				break;
 			
 			tape.append(result);
@@ -163,15 +151,15 @@ export class TapeParser
 		// <tag .... 
 		if (X.MarkupOpenToken.pattern.test(token))
 		{
-			tape = new X.Tape(X.TapeKind.markup);
+			tape = this.createTape(X.Enclosure.markup);
 			tape.append(X.MarkupOpenToken.new(token));
 			
 			for (;;)
 			{
-				if (token === X.tokens.markupClose.text ||
-					token === X.tokens.markupIslandClose.text)
+				if (token === X.delimitersForMarkup.markupClose.text ||
+					token === X.delimitersForMarkup.markupIslandClose.text)
 				{
-					tape.append(X.tokens.markupClose);
+					tape.append(X.delimitersForMarkup.markupClose);
 					break;
 				}
 				
@@ -182,7 +170,7 @@ export class TapeParser
 		// <tag>
 		if (X.MarkupStartToken.pattern.test(token))
 		{
-			tape = new X.Tape(X.TapeKind.markup);
+			tape = this.createTape(X.Enclosure.markup);
 			tape.append(X.MarkupStartToken.new(token));
 		}
 		
@@ -202,9 +190,9 @@ export class TapeParser
 				}
 				
 				// Substitutions
-				if (token === X.tokens.substitutionTapeL.text)
+				if (token === X.delimiters.substitutionTapeL.text)
 				{
-					const subTape = new X.Tape(X.TapeKind.substitution);
+					const subTape = this.createTape(X.Enclosure.substitution);
 					debugger;
 					//while (this.tokens[this.index] !== X.Delimiters.substitutionTapeR)
 					//	subTape.push(this.parseOne());

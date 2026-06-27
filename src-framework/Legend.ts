@@ -48,7 +48,7 @@ export const Legend = new class
 		const tapeRows: ITapeRow[] = [];
 		for (const [proxyable, character] of X.Proxy.each())
 		{
-			if (X.isTapeKind(proxyable))
+			if (X.isEnclosure(proxyable))
 			{
 				const { code, unicode } = getCodes(character);
 				tapeRows.push({
