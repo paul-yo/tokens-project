@@ -126,6 +126,7 @@ The core engine is structurally present but **very WIP**.
 - Enough production rules exist to parse a basic function — a meaningful start, far from complete.
 - Tests are MIA and need real investment before I'd treat it as strong evidence of correctness.
 - The docs are unfortunately "just ask Claude bro". More work needed.
+- More refactoring is needed to fully separate the framework from the sample language.
 
 **Expect turbulence.** APIs, the mask schema, and the proxy-character scheme are all still moving as the grammar grows. Come in expecting a research engine that works, not a stable library. The sample language is also somewhat stapled to the engine. The plan is to separate "framework-general" code from "language-specific" code in the near future so that we have a reusable parsing engine.
 
