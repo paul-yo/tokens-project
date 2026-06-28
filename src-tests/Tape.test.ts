@@ -1,9 +1,9 @@
 import * as X from "../src-language/XX.ts";
 import { test } from "node:test";
-import * as assert from "node:assert/strict";
+import assert from "node:assert/strict";
 
 /** */
-export async function testTape()
+test("Basic tape test", () =>
 {
 	const tape = createTape();
 	const tokens = [
@@ -147,10 +147,10 @@ export async function testTape()
 		throw "fakeMask wasn't properly evicted.";
 	
 	console.log("Make-shift tape test has passed.");
-}
+});
 
 /** */
-export async function testTapeMasks()
+test("Basic mask test", () =>
 {
 	const tape = createTape();
 	const tokens = [
@@ -188,7 +188,7 @@ export async function testTapeMasks()
 	lens.applyMask(infixMask, 0, 3);
 	
 	console.log(lens.charstringReadable);
-}
+});
 
 /** */
 function createTape()

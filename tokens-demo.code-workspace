@@ -4,12 +4,24 @@
 			"path": "."
 		}
 	],
+	"extensions": {
+		"recommendations": [
+			"connor4312.nodejs-testing"
+		]
+	},
 	"settings": {
 		"js/ts.tsdk.path": "node_modules/typescript/lib",
 		"js/ts.tsdk.promptToUseWorkspaceVersion": true,
 		"files.exclude": {
 			"dist": true
 		},
+		"nodejs-testing.include": [
+			"./src-tests/"
+		],
+		"nodejs-testing.extensions": [{
+			"extensions": ["ts"],
+			"parameters": []
+		}],
 	},
 	"launch": {
 		"version": "0.2.0",
@@ -18,7 +30,7 @@
 				"type": "node",
 				"request": "launch",
 				"name": "Debug Project",
-				"program": "src-language/index.ts",
+				"program": "src-tests/Tape.test.ts",
 				"skipFiles": [
 					"<node_internals>/**"
 				],
