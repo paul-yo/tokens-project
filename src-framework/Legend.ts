@@ -66,16 +66,16 @@ export const Legend = new class
 			if (X.Mask.isType(proxyable))
 			{
 				const { code, unicode } = getCodes(character);
-				const schema = proxyable.schema;
+				const desc = proxyable.descriptor;
 				maskRows.push({
 					type: proxyable.name,
 					character,
 					code,
 					unicode,
-					fullPattern: schema.enclosureIgnoringMatcher?.source || "(no pattern)",
-					debugFullPattern: schema.getReadablePattern(false),
-					fastPattern: schema.insidePattern,
-					debugFastPattern: schema.getReadablePattern(true),
+					fullPattern: desc.enclosureIgnoringMatcher?.source || "(no pattern)",
+					debugFullPattern: desc.getReadablePattern(false),
+					fastPattern: desc.insidePattern,
+					debugFastPattern: desc.getReadablePattern(true),
 				});
 			}
 		}

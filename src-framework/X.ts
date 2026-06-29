@@ -9,6 +9,6 @@ export * from "./Enclosure.ts";
 export * from "./TapeParser.ts";
 export * from "./Field.ts";
 export * from "./Mask.ts";
-export * from "./MaskSchema.ts";
+export * from "./MaskDescriptor.ts";
 export * from "./MaskApplicator.ts";
 export * from "./Language.ts";

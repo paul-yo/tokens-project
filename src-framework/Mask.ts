@@ -9,9 +9,8 @@ export type TMaskOptions = {
 	}
 };
 
-export type TMaskFields = { [K: string]: X.TField };
-export type TMaskSchemaObject = TMaskOptions & TMaskFields;
-export type TMaskEnclosureSchemaObject = {
+export type TMaskSchema = TMaskOptions & { [K: string]: X.TField };
+export type TMaskSchemaEnclosed = {
 	enclosure: X.Enclosure,
 	content: X.IManyField | X.IOneField
 };
@@ -30,20 +29,20 @@ const maskBrand = Symbol("maskBrand");
 export abstract class Mask
 {
 	/**
-	 * Gets or sets the MaskSchema associated with the mask.
+	 * Gets or sets the MaskDescriptor associated with the mask.
 	 */
-	static get schema()
+	static get descriptor()
 	{
-		if (!this._schema)
-			throw "Mask schema not set yet.";
+		if (!this._descriptor)
+			throw "Mask descriptor not set yet.";
 		
-		return this._schema;
+		return this._descriptor;
 	}
-	static set schema(value: X.MaskSchema)
+	static set descriptor(value: X.MaskDescriptor)
 	{
-		this._schema = value;
+		this._descriptor = value;
 	}
-	private static _schema: X.MaskSchema | null = null;
+	private static _descriptor: X.MaskDescriptor | null = null;
 	
 	/** */
 	static isType(value: any): value is typeof Mask
@@ -56,7 +55,7 @@ export abstract class Mask
 	static get isEnclosureMask() { return false; }
 	
 	/** */
-	schema(): TMaskSchemaObject { return {}; }
+	createSchema(): TMaskSchema { return {}; }
 	
 	/**
 	 * Scans the schema returned by .schema(), and produces a flat list
@@ -66,15 +65,13 @@ export abstract class Mask
 	queryFields(): readonly IMaskReflectedField[]
 	{
 		const maskEntries: IMaskReflectedField[] = [];
-		
-		// This naming is strange, and also we shouldn't be calling this
-		// function to re-generate the schema every time, this should be cached.
-		const objectEntries = Object.entries(this.schema());
-		let structureBuffer: X.FixedToken[] = [];
-		
-		let lastIndex = objectEntries.length - 1;
+		//const schema = (this.constructor as typeof Mask).schema;
+		const schema = this.createSchema();
+		const objectEntries = Object.entries(schema);
+		const structureBuffer: X.FixedToken[] = [];
+		const lastIndex = objectEntries.length - 1;
 		const [lastName, lastField] = objectEntries[lastIndex];
-		const lastStructure = X.isStructuralProperty(lastName) ?
+		const lastStructure = X.isAnchorProperty(lastName) ?
 			X.toArray(lastField) as any as X.FixedToken[] :
 			[];
 		
@@ -83,7 +80,7 @@ export abstract class Mask
 			const [name, field] = objectEntries[i];
 			const value = (this as any)[name];
 			
-			if (X.isStructuralProperty(name))
+			if (X.isAnchorProperty(name))
 			{
 				const fixedTokens = X.toArray(field) as any as X.FixedToken[];
 				structureBuffer.push(...fixedTokens);
@@ -97,7 +94,7 @@ export abstract class Mask
 			maskEntries.push({
 				value,
 				field,
-				structureConditional,
+				anchorConditional: structureConditional,
 				structureBefore: structureBuffer,
 				structureAfter: i === lastIndex ? lastStructure : [],
 			});
@@ -107,7 +104,7 @@ export abstract class Mask
 	}
 	
 	/** */
-	queryContainedToken(contained: X.Token | X.Tape): IMaskReflectedToken | null
+	queryToken(containedToken: X.Token | X.Tape): IMaskReflectedToken | null
 	{
 		return null;
 	}
@@ -124,8 +121,8 @@ export interface IMaskReflectedToken
 /**
  * Describes a single resolved field within a mask's schema, pairing
  * the field's current runtime value with the X.TField metadata that
- * describes how it should be parsed/serialized, along with any fixed
- * structural tokens that surround it.
+ * describes how it should be parsed/serialized, along with any anchors
+ * that surround it.
  */
 export interface IMaskReflectedField
 {
@@ -145,24 +142,24 @@ export interface IMaskReflectedField
 	readonly field: X.TField;
 	
 	/**
-	 * Stores the fixed structural tokens that are conditionally present
+	 * Stores the anchor tokens that are conditionally present
 	 * based on the value of a IHasField. If the local field value is not an
 	 * IHasField, then this will be an empty array.
 	 */
-	readonly structureConditional: readonly X.FixedToken[];
+	readonly anchorConditional: readonly X.FixedToken[];
 	
 	/**
-	 * Any fixed structural tokens (literal separators, delimiters, etc)
+	 * Any anchor tokens (literal separators, delimiters, etc)
 	 * that appear in the schema immediately before this field, and
-	 * which were accumulated while scanning prior structural entries.
+	 * which were accumulated while scanning prior entries.
 	 */
 	readonly structureBefore: readonly X.FixedToken[];
 	
 	/**
-	 * Fixed structural tokens that appear after this field. This is
-	 * only populated for the last field in the schema, and reflects
-	 * the trailing structural tokens defined at the end of the schema
-	 * object (every other field gets an empty array here).
+	 * Anchor tokens that appear after this field. This is only populated
+	 * for the last field in the schema, and reflects the trailing anchor
+	 * tokens defined at the end of the schema object (every other field
+	 * gets an empty array here).
 	 */
 	readonly structureAfter: readonly X.FixedToken[];
 }
@@ -178,9 +175,9 @@ export abstract class EnclosureMask extends X.Mask
 	static get isEnclosureMask() { return true; }
 	
 	/** */
-	schema(): X.TMaskSchemaObject
+	createSchema(): X.TMaskSchema
 	{
-		const { enclosure, content } = this.enclosureSchema();
+		const { enclosure, content } = this.createSchemaEnclosed();
 		return {
 			[X.schemaOptions]: { enclosure },
 			content
@@ -188,7 +185,7 @@ export abstract class EnclosureMask extends X.Mask
 	}
 	
 	/** */
-	enclosureSchema(): TMaskEnclosureSchemaObject
+	createSchemaEnclosed(): TMaskSchemaEnclosed
 	{
 		return { 
 			enclosure: X.Enclosure.none,

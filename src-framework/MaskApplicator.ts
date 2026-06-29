@@ -7,7 +7,7 @@ type TMatchableField = X.IOneField | X.ILassoField | X.IManyField | X.ISomeField
  */
 export function applyApexMasks(tape: X.Tape, masks: readonly typeof X.Mask[])
 {
-	const apexCandidates = masks.map(m => m.schema);
+	const apexCandidates = masks.map(m => m.descriptor);
 	return applyMasks(tape, apexCandidates);
 }
 
@@ -16,7 +16,7 @@ export function applyApexMasks(tape: X.Tape, masks: readonly typeof X.Mask[])
  * over the provided unread tape, sequentially, until the tape
  * has been fully exhausted.
  */
-function applyMasks(tape: X.Tape, candidates: X.MaskSchema[])
+function applyMasks(tape: X.Tape, candidates: X.MaskDescriptor[])
 {
 	// There has to be an opportunity for there to be a field here
 	// because this whole thing here about candidates and mask applying
@@ -26,9 +26,9 @@ function applyMasks(tape: X.Tape, candidates: X.MaskSchema[])
 	
 	next: for (const subTape of tape.read())
 	{
-		for (const maskSchema of candidates)
+		for (const descriptor of candidates)
 		{
-			const maskResult = tryApplyMask(subTape, maskSchema);
+			const maskResult = tryApplyMask(subTape, descriptor);
 			if (maskResult)
 			{
 				masks.push(...maskResult);
@@ -49,10 +49,10 @@ function applyMasks(tape: X.Tape, candidates: X.MaskSchema[])
  */
 function tryApplyMask(
 	tape: X.TapeLike,
-	maskSchema: X.MaskSchema,
+	descriptor: X.MaskDescriptor,
 	depth = 0)
 {
-	const matcher = maskSchema.enclosureIgnoringMatcher;
+	const matcher = descriptor.enclosureIgnoringMatcher;
 	if (!matcher)
 		return null;
 	
@@ -76,12 +76,12 @@ function tryApplyMask(
 	// can dodge this.
 	for (let i = -1; ++i < matchesArray.length;)
 	{
-		const mask = new (maskSchema.type as any)(); // 🫤
+		const mask = new (descriptor.type as any)(); // 🫤
 		const matches = matchesArray[i];
 		
 		for (const group of matches.groups)
 		{
-			const field = maskSchema.fields[group.name];
+			const field = descriptor.schema[group.name];
 			
 			// If there is a zero-length result then there is no point
 			// in continuing we can just assign the field's default value.
@@ -246,7 +246,7 @@ function getMatchFieldValue(tapeLike: X.TapeLike, field: TMatchableField, depth 
 				return e;
 			
 			const unmaskedTokenCountBefore = tapeLike.unmaskedTokenCount;
-			const result = tryApplyMask(tapeLike, match.schema, depth + 1);
+			const result = tryApplyMask(tapeLike, match.descriptor, depth + 1);
 			if (result === null)
 				continue;
 			
@@ -375,7 +375,7 @@ type TMatchedGroup = {
  * duplication-free structure: the per-field spans (named groups only,
  * skipping any that didn't participate in this match), plus the overall
  * span of the match as a whole (group 0), which covers any unnamed/
- * structural tokens the named groups don't account for.
+ * anchor tokens the named groups don't account for.
  */
 function sanitizeMatches(matches: RegExpMatchArray): TMatches | null
 {

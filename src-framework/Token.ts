@@ -3,7 +3,7 @@ import * as X from "./X.ts";
 /** */
 export abstract class Token
 {
-	/** Stores the same string as format. Used for structural normalization. */
+	/** Stores the same string as format. Used for hidden class optimization. */
 	abstract readonly text: string;
 }
 
@@ -37,7 +37,7 @@ export class FixedToken extends Token
 		this.text = text;
 	}
 	
-	/** Stores the same string as format. Used for structural normalization. */
+	/** Stores the same string as format. Used for hidden class optimization. */
 	readonly text: string;
 }
 
@@ -110,7 +110,7 @@ export abstract class FlexToken extends Token
 	/** */
 	static readonly pattern: RegExp | null = null;
 	
-	/** Stores the same string as format. Used for structural normalization. */
+	/** Stores the same string as format. Used for hidden class optimization. */
 	readonly text: string;
 }
 

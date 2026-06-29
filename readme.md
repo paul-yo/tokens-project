@@ -80,7 +80,7 @@ As a result, there's zero construct-specific parsing logic. Parsing behavior eme
 
 If you want to see how charstrings actually work, I built a debugging helper that emits the charstring legend. You can see it [here](./docs/legend.md).
 
-**Masks.** A mask is a grammar rule with a `schema()`, built from six primitives — `X.one()`, `X.many()`, `X.some()`, `X.lasso()`, `X.has()`, `X.raw()` — plus "structural" tokens that anchor a match without carrying data themselves. Here's a real one, matching postfix calls and index access:
+**Masks.** A mask is a grammar rule with a `schema()`, built from six primitives — `X.one()`, `X.many()`, `X.some()`, `X.lasso()`, `X.has()`, `X.raw()` — plus `X.anchor()`, a function to anchor a match without carrying data itself. Here's a real one, matching postfix calls and index access:
 
 ```ts
 /** .term(x)(x)[x][x] */
@@ -90,7 +90,7 @@ export class PostParticleMask extends X.Mask
 	readonly activators: (X.FunctionActivatorMask | X.IndexActivatorMask)[] = X.unset;
 	
 	schema() { return {
-		...X.structural(X.tokens.dot),
+		...X.anchor(X.tokens.dot),
 		term: X.one(X.EntityToken, X.ParticleLiteralToken),
 		activators: X.many(X.FunctionActivatorMask, X.IndexActivatorMask),
 	}}

@@ -43,15 +43,15 @@ export class Field
 	
 	/**
 	 * Indicates that the field being matched is actually nullable,
-	 * requires the specified FixedToken sequence prefix, and if those
-	 * tokens are not there, the field value comes back as null.
+	 * requires the specified FixedToken sequence prefix as anchor
+	 * to determine whether the field value is null or not.
 	 * 
 	 * Examples:
 	 * 1 to 10 step 2
 	 */
-	nullable(...structural: X.FixedToken[]): this
+	nullable(...anchor: X.FixedToken[]): this
 	{
-		this.data.nullableTokens = structural;
+		this.data.nullableTokens = anchor;
 		return this;
 	}
 	
@@ -254,24 +254,24 @@ export interface IHasField extends Field
 	match: readonly X.FixedToken[];
 }
 
-//# Field Helpers (Structural)
+//# Anchor helpers
 
 /** 🫤 */
-export type TStructuralCombinator = {};
+export type TAnchorCombinator = {};
 
 /** 
  * Specifies static tokens that must exist in the tape in order for a Mask type to be
  * matched, but otherwise do not contribute content to the matched Mask.
  */
-export function structural(...tokens: X.FixedToken[]): TStructuralCombinator
+export function anchor(...tokens: X.FixedToken[]): TAnchorCombinator
 {
-	return { [structuralPrefix + (++nextStructuralIndex)]: tokens };
+	return { [anchorPrefix + (++nextAnchorIndex)]: tokens };
 }
 
 /** */
-export function isStructuralProperty(propertyName: string)
+export function isAnchorProperty(propertyName: string)
 {
-	return propertyName.startsWith(structuralPrefix) && /[0-9]+/.test(propertyName);
+	return propertyName.startsWith(anchorPrefix) && /[0-9]+/.test(propertyName);
 }
 
 /** */
@@ -285,5 +285,5 @@ function ensureNoEnclosureMasks(matches: TMatch[])
  * Defines the character that comes before a property in a mask to demarcate that 
  * the property is refers to a list of static tokens that need to exist but are discarded.
  */
-const structuralPrefix = "!";
-let nextStructuralIndex = 0;
+const anchorPrefix = "!";
+let nextAnchorIndex = 0;

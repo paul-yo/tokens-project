@@ -59,7 +59,7 @@ export function createLanguage(spec: ILanguageSpec)
 	X.registerFlexTokens(spec.physicalFlexTokens, spec.abstractFlexTokens);
 	const lexer = createLanguageLexer(spec);
 	createLanguageProxies(spec);
-	X.MaskSchema.compile(spec);
+	X.MaskDescriptor.compile(spec);
 	
 	return new class Language
 	{

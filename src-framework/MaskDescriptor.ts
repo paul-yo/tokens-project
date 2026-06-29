@@ -1,33 +1,33 @@
 import * as X from "./X.ts";
 
 /** */
-export class MaskSchema
+export class MaskDescriptor
 {
 	/**
 	 * Compiles all schemas for all masks.
 	 */
 	static compile(spec: X.ILanguageSpec)
 	{
-		for (const sch of this.visitTopological(spec))
+		for (const desc of this.visitTopological(spec))
 		{
-			sch._insidePattern = createPatternForMask(sch, true);
-			sch._matchPattern = createPatternForMask(sch, false);
+			desc._insidePattern = createPatternForMask(desc, true);
+			desc._matchPattern = createPatternForMask(desc, false);
 			
-			const flags = "du" + (sch.sparse ? "g" : "");
+			const flags = "du" + (desc.sparse ? "g" : "");
 			
-			if (sch.enclosure !== X.Enclosure.none)
-				sch._enclosureAwareMatcher = new RegExp(X.Proxy.get(sch.enclosure), flags);
+			if (desc.enclosure !== X.Enclosure.none)
+				desc._enclosureAwareMatcher = new RegExp(X.Proxy.get(desc.enclosure), flags);
 			
-			if (sch._matchPattern !== "")
+			if (desc._matchPattern !== "")
 			{
 				try
 				{
-					sch._enclosureIgnoringMatcher = new RegExp(sch._matchPattern, flags);
+					desc._enclosureIgnoringMatcher = new RegExp(desc._matchPattern, flags);
 				}
 				catch (e)
 				{
-					console.error("Invalid regular expression pattern: " + sch._matchPattern);
-					sch._matchPattern = createPatternForMask(sch, false);
+					console.error("Invalid regular expression pattern: " + desc._matchPattern);
+					desc._matchPattern = createPatternForMask(desc, false);
 				}
 			}
 			
@@ -35,7 +35,7 @@ export class MaskSchema
 			// They are fields where we detect that it's possible to skip
 			// over some complex recursion patterns in the MaskApplicator
 			// and assign everything in a single nested field.
-			const fields = Object.values(sch.fields);
+			const fields = Object.values(desc.schema);
 			if (fields.length === 1)
 			{
 				const field = fields[0];
@@ -49,7 +49,7 @@ export class MaskSchema
 	
 	/**
 	 * Enumerates through all mask schema objects  in topological ordering, 
-	 * creating new MaskSchema objects where they are missing. This is a helper
+	 * creating new MaskDescriptor objects where they are missing. This is a helper
 	 * function of the compile() function and not intended to be used otherwise.
 	 * Fields can reference other masks and embed their regular expressions
 	 * and if these are not yet constructed... disappointment will result.
@@ -62,22 +62,22 @@ export class MaskSchema
 			X.EnclosureMask
 		]);
 		
-		function * recurse(maskType: typeof X.Mask): IterableIterator<MaskSchema>
+		function * recurse(maskType: typeof X.Mask): IterableIterator<MaskDescriptor>
 		{
 			if (seen.has(maskType))
 				return;
 			
 			seen.add(maskType);
-			const schemaObject = maskType.prototype.schema();
-			const schema = new MaskSchema(maskType, schemaObject);
-			maskType.schema = schema;
+			const schema = maskType.prototype.createSchema();
+			const desc = new MaskDescriptor(maskType, schema);
+			maskType.descriptor = desc;
 			
-			for (const field of Object.values(schemaObject))
+			for (const field of Object.values(schema))
 				for (const match of field.match || [])
 					if (X.Mask.isType(match))
 						yield * recurse(match); // recurse into deps first
 			
-			yield schema;
+			yield desc;
 		};
 		
 		for (const maskType of spec.masks)
@@ -85,14 +85,12 @@ export class MaskSchema
 	}
 	
 	/** */
-	constructor(
-		maskType: typeof X.Mask,
-		schemaObject: X.TMaskSchemaObject)
+	constructor(maskType: typeof X.Mask, schema: X.TMaskSchema)
 	{
 		this.type = maskType;
-		this.fields = schemaObject;
+		this.schema = schema;
 		
-		const options = schemaObject[X.schemaOptions];
+		const options = schema[X.schemaOptions];
 		this.sparse = !!options?.sparse;
 		this.suffix = !!options?.suffix;
 		this.enclosure = options?.enclosure || X.Enclosure.none;
@@ -105,7 +103,7 @@ export class MaskSchema
 	readonly type: typeof X.Mask;
 	
 	/** */
-	readonly fields: X.TMaskFields;
+	readonly schema: X.TMaskSchema;
 	
 	/** Stores the delimiter of the tape enclosure in which this mask is expected to be wrapped.  */
 	readonly enclosure: X.Enclosure = X.Enclosure.none;
@@ -169,33 +167,33 @@ export class MaskSchema
 /**
  * 
  */
-function createPatternForMask(schema: MaskSchema, inside: boolean)
+function createPatternForMask(descriptor: MaskDescriptor, inside: boolean)
 {
 	// There's an early cheat code here -- the inside patterns of masks that
 	// have enclosures are just the proxy character of that enclosure. This
 	// is because inside patterns are used for embedding, and the only thing
 	// that would be visible in a tape is the enclosure proxy character.
-	if (inside && schema.enclosure !== X.Enclosure.none)
-		return X.Proxy.get(schema.enclosure);
+	if (inside && descriptor.enclosure !== X.Enclosure.none)
+		return X.Proxy.get(descriptor.enclosure);
 	
 	const pattern: string[] = [];
 	
-	for (const [fieldName, field] of Object.entries(schema.fields))
+	for (const [fieldName, field] of Object.entries(descriptor.schema))
 	{
-		if (X.isStructuralProperty(fieldName))
+		if (X.isAnchorProperty(fieldName))
 		{
-			// The structural properties are a bunch of FixedToken objects
+			// The anchor properties are a bunch of FixedToken objects
 			// but this isn't expressed in the field structure type schemas,
 			// so instead of doing a bunch of typing gymnastics its easier
 			// to just do a cast to FixedTokens.
-			const structuralElements = X.toArray(field) as any as X.FixedToken[];
-			const charstring = structuralElements.map(e => X.Proxy.get(e)).join("");
+			const anchors = X.toArray(field) as any as X.FixedToken[];
+			const charstring = anchors.map(e => X.Proxy.get(e)).join("");
 			pattern.push(charstring);
 			continue;
 		}
 		
 		field.name = fieldName;
-		field.description = schema.type.name + "." + fieldName;
+		field.description = descriptor.type.name + "." + fieldName;
 		
 		const fieldPattern = inside ?
 			createPatternForField(field, true) :
@@ -208,11 +206,11 @@ function createPatternForMask(schema: MaskSchema, inside: boolean)
 	
 	if (!inside)
 	{
-		if (schema.suffix)
+		if (descriptor.suffix)
 		{
 			pattern.push("$");
 		}
-		else if (!schema.sparse && (pattern.length > 0 && !schema.suffix))
+		else if (!descriptor.sparse && (pattern.length > 0 && !descriptor.suffix))
 		{
 			pattern.unshift("^");
 			pattern.push("$");
@@ -313,19 +311,19 @@ function createPatternForField(field: X.TField, inside: boolean): string[]
 		// the generated charstring. Note that it is intentional
 		// that this is the first thing that gets checked after the
 		// the match has been narrowed to a typeof Mask.
-		else if (match.schema.enclosure !== X.Enclosure.none)
-			chars.push(X.Proxy.get(match.schema.enclosure));
+		else if (match.descriptor.enclosure !== X.Enclosure.none)
+			chars.push(X.Proxy.get(match.descriptor.enclosure));
 		
 		// In the case when you get a single wildcard pattern,
 		// we just return with it. There's no point in keeping
 		// anything that has been created or continuing to parse
 		// anything else because we've already determined that
 		// anything can match.
-		else if (inside || !match.schema.insidePattern)
+		else if (inside || !match.descriptor.insidePattern)
 			return [wildcard];
 		
 		else
-			embeds.push("(" + match.schema.insidePattern + ")");
+			embeds.push("(" + match.descriptor.insidePattern + ")");
 			//embeds.push(match.schema.insidePattern);
 	}
 	
