@@ -25,9 +25,13 @@ async function start()
 	const tape = lang.createTape(code);
 	X.applyApexMasks(tape, X.SpaceBodyMasks);
 	
-	// You should now be able to go through the tape 
-	// and it should have the whole mask graph in there.
-	debugger;
+	X.walkTape(tape, cursor =>
+	{
+		if (cursor.isAscending)
+			return;
+		
+		console.log("\t".repeat(cursor.spine.length) + cursor.element.constructor.name);
+	});
 }
 
 /** */

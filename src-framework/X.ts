@@ -11,4 +11,5 @@ export * from "./Field.ts";
 export * from "./Mask.ts";
 export * from "./MaskDescriptor.ts";
 export * from "./MaskApplicator.ts";
+export * from "./TapeWalker.ts";
 export * from "./Language.ts";
