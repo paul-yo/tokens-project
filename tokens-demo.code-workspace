@@ -29,8 +29,18 @@
 			{
 				"type": "node",
 				"request": "launch",
-				"name": "Debug Project",
+				"name": "Debug Test",
 				"program": "src-tests/Tape.test.ts",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"console": "integratedTerminal"
+			},
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "Debug Project",
+				"program": "src-language/index.ts",
 				"skipFiles": [
 					"<node_internals>/**"
 				],
