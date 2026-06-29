@@ -66,8 +66,6 @@ function tryApplyMask(
 	
 	let masks: X.Mask[] | null = null;
 	
-	console.log(`${"  ".repeat(depth)}${maskSchema.type.name}, depth = ${depth}`);
-	
 	// Match the matcher regular expression against the charstring.
 	// This handles both the case where current type is a sparse mask
 	// and a non-sparse mask. Sparsity is already baked into the
