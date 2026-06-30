@@ -15,15 +15,11 @@ export const Proxy = new class
 	/** */
 	define(proxyable: TProxyable)
 	{
-		const char = String.fromCharCode(this.nextCharCode++);
-		this.charProxyMap.set(proxyable, char);
-		this.charProxyReverseMap.set(char, proxyable);
+		const char = String.fromCharCode(nextCharCode++);
+		charProxyMap.set(proxyable, char);
+		charProxyReverseMap.set(char, proxyable);
 		return char;
 	}
-	
-	/** */
-	readonly initialCharCode = 0x25A0; // ■
-	private nextCharCode = this.initialCharCode;
 	
 	/** Returns the proxy character associated with the specified object. */
 	get(proxyable: TProxyable)
@@ -34,28 +30,28 @@ export const Proxy = new class
 		let proxy: string | undefined = "";
 			
 		if (proxyable instanceof X.FixedToken)
-			proxy = this.charProxyMap.get(proxyable);
+			proxy = charProxyMap.get(proxyable);
 		
 		else if (proxyable instanceof X.FlexToken)
-			proxy = this.charProxyMap.get(X.FlexToken.typeof(proxyable)!);
+			proxy = charProxyMap.get(X.FlexToken.typeof(proxyable)!);
 		
 		else if (X.FlexToken.isType(proxyable))
-			proxy = this.charProxyMap.get(proxyable);
+			proxy = charProxyMap.get(proxyable);
 		
 		else if (proxyable instanceof X.RawToken)
-			proxy = this.charProxyMap.get(X.RawToken);
+			proxy = charProxyMap.get(X.RawToken);
 		
 		else if (proxyable instanceof X.Tape)
-			proxy = this.charProxyMap.get(proxyable.enclosure);
+			proxy = charProxyMap.get(proxyable.enclosure);
 		
 		else if (X.isEnclosure(proxyable))
-			proxy = this.charProxyMap.get(proxyable);
+			proxy = charProxyMap.get(proxyable);
 		
 		else if (X.Mask.isType(proxyable))
-			proxy = this.charProxyMap.get(proxyable);
+			proxy = charProxyMap.get(proxyable);
 		
 		else if (proxyable instanceof X.Mask)
-			proxy = this.charProxyMap.get(proxyable.constructor as typeof X.Mask);
+			proxy = charProxyMap.get(proxyable.constructor as typeof X.Mask);
 		
 		if (!proxy)
 		{
@@ -70,7 +66,7 @@ export const Proxy = new class
 	/** Returns the proxyable item that is mapped to the specified proxy character. */
 	resolve(char: string)
 	{
-		const proxyable = this.charProxyReverseMap.get(char);
+		const proxyable = charProxyReverseMap.get(char);
 		if (!proxyable)
 			throw "Unknown char: " + char;
 		
@@ -87,7 +83,7 @@ export const Proxy = new class
 		const out: string[] = [];
 		for (const char of string)
 		{
-			if ((char.codePointAt(0) || 0) < X.Proxy.initialCharCode)
+			if ((char.codePointAt(0) || 0) < initialCharCode)
 			{
 				out.push(char);
 			}
@@ -129,13 +125,17 @@ export const Proxy = new class
 	/** */
 	* each()
 	{
-		for (const entry of this.charProxyMap)
+		for (const entry of charProxyMap)
 			yield entry;
 	}
-	
-	/** Stores a map of tokens (eg "is") and the replacement char (eg "Ɣ") */
-	private readonly charProxyMap = new Map<TProxyable, string>();
-	
-	/** Stores the reverse of the charLookup table. */
-	private readonly charProxyReverseMap = new Map<string, TProxyable>();
 }
+
+/** Stores a map of tokens (eg "is") and the replacement char (eg "Ɣ") */
+const charProxyMap = new Map<TProxyable, string>();
+
+/** Stores the reverse of the charLookup table. */
+const charProxyReverseMap = new Map<string, TProxyable>();
+
+/** */
+const initialCharCode = 0x25A0; // ■
+let nextCharCode = initialCharCode;

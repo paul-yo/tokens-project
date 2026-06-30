@@ -8,7 +8,7 @@ async function start()
 	
 	//# Setup the proxy characters
 	
-	const lang = X.createLanguage({
+	const lang = new X.Language({
 		masks: Object.values(await import("./Masks.ts")),
 		fragmentationToken: X.tokens.comma,
 		fixedTokens: Object.values(X.tokens),

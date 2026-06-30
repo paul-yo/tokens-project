@@ -21,69 +21,63 @@ export interface ILanguageSpec
 }
 
 /** */
-export function createLanguage(spec: ILanguageSpec)
+export class Language
 {
-	// This is cheating like *crazy* but it's the best we have right now.
-	// This is the stuff from the Relocants file that we need to generalize
-	// at some point, and when that happens we won't need to hack this
-	// stuff into the tokens contains in the spec.
-	
-	spec.fixedTokens = [
-		...spec.fixedTokens,
-		...Object.values(X.delimiters),
-		...Object.values(X.delimitersForMarkup)
-	];
-	
-	spec.physicalFlexTokens = Object.assign(
-		{},
-		spec.physicalFlexTokens,
-		{
-			entityToken: X.EntityToken,
-			spaceToken: X.SpaceToken,
-			newlineToken: X.NewlineToken,
-			markupOpenToken: X.MarkupOpenToken,
-			markupStartToken: X.MarkupStartToken,
-			markupEndToken: X.MarkupEndToken,
-			markupAttrStartToken: X.MarkupAttrStartToken,
-		});
-	
-	spec.abstractFlexTokens = Object.assign(
-		{},
-		spec.abstractFlexTokens,
-		{
-			whitespaceToken: X.WhitespaceToken,
-			flexDelimiterToken: X.FlexDelimiterToken,
-		}
-	);
-	
-	X.registerFlexTokens(spec.physicalFlexTokens, spec.abstractFlexTokens);
-	const lexer = createLanguageLexer(spec);
-	createLanguageProxies(spec);
-	X.MaskDescriptor.compile(spec);
-	
-	return new class Language
+	/** */
+	constructor(spec: ILanguageSpec)
 	{
-		/** */
-		constructor(lexer: moo.Lexer, spec: ILanguageSpec)
-		{
-			this.lexer = lexer;
-			this.spec = spec;
-		}
+		// This is cheating like *crazy* but it's the best we have right now.
+		// This is the stuff from the Relocants file that we need to generalize
+		// at some point, and when that happens we won't need to hack this
+		// stuff into the tokens contains in the spec.
 		
-		private lexer: moo.Lexer;
-		private spec: ILanguageSpec;
+		spec.fixedTokens = [
+			...spec.fixedTokens,
+			...Object.values(X.delimiters),
+			...Object.values(X.delimitersForMarkup)
+		];
 		
-		/** Creates a hierarchial tape */
-		createTape(codeText: string)
-		{
-			this.lexer.reset(codeText);
-			const mooTokens = Array.from(this.lexer);
-			const textTokens = mooTokens.map(s => s.text);
-			const parser = new X.TapeParser(textTokens, this.spec);
-			return parser.parse();
-		}
+		spec.physicalFlexTokens = Object.assign(
+			{},
+			spec.physicalFlexTokens,
+			{
+				entityToken: X.EntityToken,
+				spaceToken: X.SpaceToken,
+				newlineToken: X.NewlineToken,
+				markupOpenToken: X.MarkupOpenToken,
+				markupStartToken: X.MarkupStartToken,
+				markupEndToken: X.MarkupEndToken,
+				markupAttrStartToken: X.MarkupAttrStartToken,
+			});
 		
-	}(lexer, spec);
+		spec.abstractFlexTokens = Object.assign(
+			{},
+			spec.abstractFlexTokens,
+			{
+				whitespaceToken: X.WhitespaceToken,
+				flexDelimiterToken: X.FlexDelimiterToken,
+			}
+		);
+		
+		X.registerFlexTokens(spec.physicalFlexTokens, spec.abstractFlexTokens);
+		createLanguageProxies(spec);
+		X.MaskDescriptor.compile(spec);
+		this.spec = spec;
+		this.lexer = createLanguageLexer(spec);
+	}
+	
+	private lexer: moo.Lexer;
+	private spec: ILanguageSpec;
+	
+	/** Creates a hierarchial tape which is parsed from the specified code string. */
+	createTape(codeText: string)
+	{
+		this.lexer.reset(codeText);
+		const mooTokens = Array.from(this.lexer);
+		const textTokens = mooTokens.map(s => s.text);
+		const parser = new X.TapeParser(textTokens, this.spec);
+		return parser.parse();
+	}
 }
 
 /** */
