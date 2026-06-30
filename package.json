@@ -4,11 +4,17 @@
 	"author": "Paul Young",
 	"license": "MIT",
 	"description": "A parsing architecture designed to enable a new category of languages and code editors.",
-	"keywords": ["editor", "parser", "compiler", "languages"],
+	"keywords": [
+		"editor",
+		"parser",
+		"compiler",
+		"languages"
+	],
 	"type": "module",
 	"scripts": {
 		"start": "node src-language/index.ts",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"moo": "^0.5.3"
@@ -16,6 +22,7 @@
 	"devDependencies": {
 		"@types/moo": "^0.5.10",
 		"@types/node": "^25.6.0",
+		"husky": "^9.1.7",
 		"tsx": "^4.21.0",
 		"typescript": "^6.0.3"
 	}

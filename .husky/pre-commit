@@ -1,0 +1,8 @@
+npx tsc -p tsconfig.context.json
+
+if [ $? -ne 0 ]; then
+	echo "tsc declaration generation failed — commit aborted"
+	exit 1
+fi
+
+git add ./llm-context/api

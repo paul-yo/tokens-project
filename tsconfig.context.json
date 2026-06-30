@@ -1,0 +1,13 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"noEmit": false,
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"outDir": "./llm-context/api",
+		"rootDir": "./src-framework"
+	},
+	"include": [
+		"src-framework/X.ts"
+	]
+}
