@@ -38,6 +38,12 @@ interface ICursor
 	 */
 	readonly element: X.Mask;
 	
+	/**
+	 * Stores a boolean field that indicates whether the traversal is
+	 * on the way down, or coming back up. The visitor callback is
+	 * fired on both sides. Function implementations are expected
+	 * to early return if they only want handling for one direction.
+	 */
 	readonly isAscending: boolean;
 }
 
