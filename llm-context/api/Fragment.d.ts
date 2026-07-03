@@ -8,6 +8,11 @@ export interface ITapeCursor {
     /** Stores the mask at the current location, if one exists. */
     mask: X.Mask | null;
     /**
+     * Stores the fragment over which the cursor is pointing.
+     * The value is null if cursoring over unfragmented tokens.
+     */
+    fragment: X.Fragment | null;
+    /**
      * Stores the tokens at the current mask location that were covered by a mask.
      * The array will be null in the case when there is no mask at the location.
      */
