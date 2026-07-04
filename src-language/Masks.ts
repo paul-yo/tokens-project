@@ -304,7 +304,7 @@ export class WorkerMask extends X.Mask
 export class ClassMask extends X.Mask
 {
 	readonly name: X.EntityToken = X.unset;
-	readonly supers: X.EntityToken[] = X.unset;
+	readonly supers: X.EntityToken[] | null = X.unset;
 	readonly members: X.ClassBodyMasks[] = X.unset;
 		
 	createSchema() { return {

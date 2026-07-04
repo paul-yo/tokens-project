@@ -2,16 +2,11 @@ import * as X from "./X.ts";
 /**
  * An object that stores information discovered at a specific point in a tape.
  */
-export interface ITapeCursor {
+export interface IFragmentCursor {
     /** Stores the unmasked token at the current location, if one exists. */
     token: X.Token | X.Tape | null;
     /** Stores the mask at the current location, if one exists. */
     mask: X.Mask | null;
-    /**
-     * Stores the fragment over which the cursor is pointing.
-     * The value is null if cursoring over unfragmented tokens.
-     */
-    fragment: X.Fragment | null;
     /**
      * Stores the tokens at the current mask location that were covered by a mask.
      * The array will be null in the case when there is no mask at the location.
@@ -93,22 +88,25 @@ export declare class Fragment {
      */
     deleteToken(at: number): X.Mask | null;
     /** Mask-aware index lookup. */
-    at(index: number): X.Tape | X.Token | X.Mask;
+    at(index: number): X.Mask | null;
     /** Used as runtime to convert a tape into it's charstring representation. */
     get charstring(): string;
     private _charstringCache;
     /** Gets the readable version of the charstring, for debugging purposes. */
     get charstringReadable(): string;
     /**
-     * Does a walk of the fragment, yielding either a token
-     * or a mask depending on what is found at each index.
+     * Performs a non-recursive scan of the token and mask sequence
+     * of the fragments contained with in the Tape.
      */
-    walk(): Generator<X.Tape | X.Token | X.Mask, void, unknown>;
-    /**
-     * Performs the same operation as .walk() but returning
-     * a cursor with extended information.
-     */
-    walkCursor(): IterableIterator<ITapeCursor>;
+    scan(): Generator<{
+        token: X.Tape | X.Token;
+        mask: null;
+        tokensCovered: null;
+    } | {
+        token: null;
+        mask: X.Mask;
+        tokensCovered: (X.Tape | X.Token)[];
+    }, void, unknown>;
     /**
      * Translates a mask-relative index into the corresponding token-relative
      * index. Counting is done left-to-right over the slot list, where a

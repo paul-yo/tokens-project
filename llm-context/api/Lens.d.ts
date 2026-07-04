@@ -56,11 +56,20 @@ export declare class Lens {
     /** */
     get charstringReadable(): string;
     /** */
-    at(index: number): X.Tape | X.Token | X.Mask;
-    /** */
-    walk(): Generator<X.Tape | X.Token | X.Mask, void, unknown>;
-    /** */
-    walkCursor(): Generator<never, void, unknown>;
+    at(index: number): X.Tape | X.Token | X.Mask | null;
+    /**
+     * Performs a non-recursive scan of the token and mask sequence
+     * that exist in the Tape or Fragment that sits underneath this Lens.
+     */
+    scan(): Generator<{
+        token: X.Tape | X.Token;
+        mask: null;
+        tokensCovered: null;
+    } | {
+        token: null;
+        mask: X.Mask;
+        tokensCovered: (X.Tape | X.Token)[];
+    }, void, unknown>;
     /** */
     private checkLamports;
 }

@@ -15,7 +15,7 @@ export type TapeLike = Tape | X.Fragment | X.Lens;
 /**
  * An object that stores information discovered at a specific point in a tape.
  */
-export interface ITapeNavigationCursor extends X.ITapeCursor {
+export interface ITapeNavigationCursor extends X.IFragmentCursor {
     /** */
     containingTape: X.Tape;
 }
@@ -27,7 +27,7 @@ export declare class Tape {
     readonly lamport: number;
     /***/
     readonly enclosure: X.Enclosure;
-    /** */
+    /** Stores the separator token that forces a fragment into existence. */
     private readonly fragmenter;
     /** */
     private readonly fragments;
@@ -100,24 +100,20 @@ export declare class Tape {
     /** */
     get charstringReadable(): string;
     /** Mask-aware index lookup. */
-    at(index: number): X.Tape | X.Token | X.Mask;
+    at(index: number): X.Tape | X.Token | X.Mask | null;
     /**
-     * Does a walk of each fragment in the tape, as well as the unfragmented
-     * tokens, yielding either a token or a mask depending on what is found
-     * at each index.
+     * Scans through each fragment in the tape, as well as any other trailing tokens,
+     * and yield information about what is found at each slot.
      */
-    walk(): Generator<X.Tape | X.Token | X.Mask, void, unknown>;
-    /**
-     * Performs the same operation as .walk() but returning
-     * a cursor with extended information.
-     */
-    walkCursor(): IterableIterator<X.ITapeCursor>;
-    /**
-     * Performs a depth-first recursive cursor-based walk on the tape.
-     */
-    walkRecursive(): IterableIterator<X.ITapeNavigationCursor>;
-    /** */
-    private walkRecursiveInner;
+    scan(): Generator<{
+        token: X.Tape | X.Token;
+        mask: null;
+        tokensCovered: null;
+    } | {
+        token: null;
+        mask: X.Mask;
+        tokensCovered: (X.Tape | X.Token)[];
+    }, void, unknown>;
     /**
      * Stub.
      * Defers to Fragment.toTokenRelative once Tape-level offset bookkeeping is worked out.
