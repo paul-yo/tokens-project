@@ -16,11 +16,6 @@ async function start()
 		abstractFlexTokens: X.flexTokensAbstract,
 	});
 	
-	//#
-	
-	//if (1) return void await testTapeMasks();
-	//if (1) return void (await import("../src-framework/Legend.ts")).Legend.write("./legend.md");
-	
 	const code = readCase("simple-function-0");
 	const tape = lang.createTape(code);
 	X.applyApexMasks(tape, X.SpaceBodyMasks);
