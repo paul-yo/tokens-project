@@ -302,10 +302,13 @@ function getMatchFieldValueOnlyFlex(tapeLike: X.TapeLike, field: TMatchableField
 		// containing all the flex tokens that match.
 		const array: X.FlexToken[] = [];
 		
-		for (const token of tapeLike.walk())
+		for (const cursor of tapeLike.scan())
+		{
+			const element = cursor.mask || cursor.token;
 			for (const match of matches)
-				if (token instanceof match)
-					array.push(token);
+				if (element instanceof match)
+					array.push(element);
+		}
 		
 		return array;
 	}
@@ -334,10 +337,13 @@ function getMatchFieldValueOnlySelect(tapeLike: X.TapeLike, field: TMatchableFie
 	{
 		const array: X.FixedToken[] = [];
 		
-		for (const token of tapeLike.walk())
+		for (const cursor of tapeLike.scan())
+		{
+			const element = cursor.mask || cursor.token;
 			for (const match of matches)
-				if (X.isSelectMatchMember(token, match))
-					array.push(token as X.FixedToken);
+				if (X.isSelectMatchMember(element, match))
+					array.push(element as X.FixedToken);
+		}
 		
 		return array;
 	}

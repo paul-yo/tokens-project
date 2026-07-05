@@ -161,13 +161,16 @@ export class Lens
 		return this.source.at(this.sliceBeginMaskRelative + index);
 	}
 	
-	/** */
-	* walk()
+	/**
+	 * Performs a non-recursive scan of the token and mask sequence
+	 * that exist in the Tape or Fragment that sits underneath this Lens.
+	 */
+	* scan()
 	{
 		this.checkLamports();
 		
 		let pos = 0;
-		for (const element of this.source.walk())
+		for (const element of this.source.scan())
 		{
 			if (pos < this.sliceBegin)
 				continue;
@@ -178,12 +181,6 @@ export class Lens
 			yield element;
 			pos++;
 		}
-	}
-	
-	/** */
-	* walkCursor()
-	{
-		throw "Not implemented";
 	}
 	
 	/** */

@@ -3,7 +3,7 @@ import * as X from "./X.ts";
 /**
  * An object that stores information discovered at a specific point in a tape.
  */
-export interface ITapeCursor
+export interface IFragmentCursor
 {
 	/** Stores the unmasked token at the current location, if one exists. */
 	token: X.Token | X.Tape | null;
@@ -217,9 +217,9 @@ export class Fragment
 	at(index: number)
 	{
 		let count = 0;
-		for (const mask of this.walk())
+		for (const cursor of this.scan())
 			if (index === count++)
-				return mask;
+				return cursor.mask || cursor.token;
 		
 		throw "Index out of range";
 	}
@@ -232,8 +232,11 @@ export class Fragment
 		
 		const chars: string[] = [];
 		
-		for (const element of this.walk())
+		for (const cursor of this.scan())
+		{
+			const element = cursor.mask || cursor.token;
 			chars.push(X.Proxy.get(element));
+		}
 		
 		return this._charstringCache = chars.join("");
 	}
@@ -246,10 +249,10 @@ export class Fragment
 	}
 	
 	/**
-	 * Does a walk of the fragment, yielding either a token
-	 * or a mask depending on what is found at each index.
+	 * Performs a non-recursive scan of the token and mask sequence
+	 * of the fragments contained with in the Tape.
 	 */
-	* walk()
+	* scan()
 	{
 		for (let index = -1; ++index < this.indexes.length;)
 		{
@@ -258,49 +261,28 @@ export class Fragment
 			// If maybeMaskIndex is the sentinel, then it's not
 			// a mask index and the index refers to a token
 			if (maybeMaskIndex === TOKEN_SENTINEL)
-				yield this.tokens[index];
-			
-			// Skip over duplicate non-sentinel indexes because
-			// these are the physical index of the same mask
-			// and we don't want to yield it multiple times.
-			else if (maybeMaskIndex !== this.indexes[index - 1])
-				yield this.masks[maybeMaskIndex];
-		}
-	}
-	
-	/**
-	 * Performs the same operation as .walk() but returning
-	 * a cursor with extended information.
-	 */
-	* walkCursor(): IterableIterator<ITapeCursor>
-	{
-		for (let index = -1; ++index < this.indexes.length;)
-		{
-			const maybeMaskIndex = this.indexes[index];
-			
-			if (maybeMaskIndex === TOKEN_SENTINEL)
 			{
 				yield {
 					token: this.tokens[index],
 					mask: null,
-					tokensCovered: null
+					tokensCovered: null,
 				};
 			}
-			else
+			// Skip over duplicate non-sentinel indexes because
+			// these are the physical index of the same mask
+			// and we don't want to yield it multiple times.
+			else if (maybeMaskIndex !== this.indexes[index - 1])
 			{
-				if (maybeMaskIndex !== this.indexes[index - 1])
-				{
-					const tokensCovered: (X.Token | X.Tape)[] = [];
-					for (let i = -1; ++i < this.indexes.length;)
-						if (this.indexes[i] === maybeMaskIndex)
-							tokensCovered.push(this.tokens[i]);
-					
-					yield {
-						token: null,
-						mask: this.masks[maybeMaskIndex],
-						tokensCovered
-					};
-				}
+				const tokensCovered: (X.Token | X.Tape)[] = [];
+				for (let i = -1; ++i < this.indexes.length;)
+					if (this.indexes[i] === maybeMaskIndex)
+						tokensCovered.push(this.tokens[i]);
+				
+				yield {
+					token: null,
+					mask: this.masks[maybeMaskIndex],
+					tokensCovered,
+				};
 			}
 		}
 	}

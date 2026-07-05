@@ -100,7 +100,7 @@ export declare class Tape {
     /** */
     get charstringReadable(): string;
     /** Mask-aware index lookup. */
-    at(index: number): X.Tape | X.Token | X.Mask | null;
+    at(index: number): X.Tape | X.Token | X.Mask;
     /**
      * Scans through each fragment in the tape, as well as any other trailing tokens,
      * and yield information about what is found at each slot.

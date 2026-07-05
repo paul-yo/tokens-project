@@ -65,7 +65,6 @@ export abstract class Mask
 	queryFields(): readonly IMaskReflectedField[]
 	{
 		const maskEntries: IMaskReflectedField[] = [];
-		//const schema = (this.constructor as typeof Mask).schema;
 		const schema = this.createSchema();
 		const objectEntries = Object.entries(schema);
 		const structureBuffer: X.FixedToken[] = [];

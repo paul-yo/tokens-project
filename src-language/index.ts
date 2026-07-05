@@ -25,13 +25,8 @@ async function start()
 	const tape = lang.createTape(code);
 	X.applyApexMasks(tape, X.SpaceBodyMasks);
 	
-	X.walkTape(tape, cursor =>
-	{
-		if (cursor.isAscending)
-			return;
-		
-		console.log("\t".repeat(cursor.spine.length) + cursor.element.constructor.name);
-	});
+	const htmlText = X.translateTapeToHtml(tape, () => []);
+	console.log(htmlText);
 }
 
 /** */

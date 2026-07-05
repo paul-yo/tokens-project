@@ -56,7 +56,7 @@ export declare class Lens {
     /** */
     get charstringReadable(): string;
     /** */
-    at(index: number): X.Tape | X.Token | X.Mask | null;
+    at(index: number): X.Tape | X.Token | X.Mask;
     /**
      * Performs a non-recursive scan of the token and mask sequence
      * that exist in the Tape or Fragment that sits underneath this Lens.

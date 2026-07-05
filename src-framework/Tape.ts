@@ -18,7 +18,7 @@ export type TapeLike = Tape | X.Fragment | X.Lens;
 /**
  * An object that stores information discovered at a specific point in a tape.
  */
-export interface ITapeNavigationCursor extends X.ITapeCursor
+export interface ITapeNavigationCursor extends X.IFragmentCursor
 {
 	/** */
 	containingTape: X.Tape;
@@ -40,7 +40,7 @@ export class Tape
 	/***/
 	readonly enclosure: X.Enclosure;
 	
-	/** */
+	/** Stores the separator token that forces a fragment into existence. */
 	private readonly fragmenter: X.FixedToken;
 	
 	/** */
@@ -293,58 +293,21 @@ export class Tape
 	}
 	
 	/**
-	 * Does a walk of each fragment in the tape, as well as the unfragmented
-	 * tokens, yielding either a token or a mask depending on what is found 
-	 * at each index.
+	 * Scans through each fragment in the tape, as well as any other trailing tokens,
+	 * and yield information about what is found at each slot.
 	 */
-	* walk()
+	* scan()
 	{
 		for (const fragment of this.fragments)
-			yield * fragment.walk();
+			yield * fragment.scan();
 		
 		for (const token of this.unreadTokens)
-			yield token;
-	}
-	
-	/**
-	 * Performs the same operation as .walk() but returning
-	 * a cursor with extended information.
-	 */
-	* walkCursor(): IterableIterator<X.ITapeCursor>
-	{
-		for (const fragment of this.fragments)
-			yield * fragment.walkCursor();
-		
-		for (const token of this.unreadTokens)
+		{
 			yield {
 				token,
 				mask: null,
 				tokensCovered: null,
 			}
-	}
-	
-	/**
-	 * Performs a depth-first recursive cursor-based walk on the tape.
-	 */
-	walkRecursive()
-	{
-		return this.walkRecursiveInner(this);
-	}
-	
-	/** */
-	private * walkRecursiveInner(containingTape: X.Tape): IterableIterator<X.ITapeNavigationCursor>
-	{
-		for (const cursor of containingTape.walkCursor())
-		{
-			yield {
-				containingTape,
-				...cursor,
-			};
-			
-			if (cursor.tokensCovered)
-				for (const token of cursor.tokensCovered)
-					if (token instanceof X.Tape)
-						yield * this.walkRecursiveInner(token);
 		}
 	}
 	

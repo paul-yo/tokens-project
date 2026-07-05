@@ -88,7 +88,7 @@ export declare class Fragment {
      */
     deleteToken(at: number): X.Mask | null;
     /** Mask-aware index lookup. */
-    at(index: number): X.Mask | null;
+    at(index: number): X.Tape | X.Token | X.Mask;
     /** Used as runtime to convert a tape into it's charstring representation. */
     get charstring(): string;
     private _charstringCache;
