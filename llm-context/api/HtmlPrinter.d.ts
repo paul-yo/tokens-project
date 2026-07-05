@@ -7,18 +7,4 @@ export type ClassifierFn = (node: TClassifiable) => readonly string[];
  * "HTML Emitter Specification". The emitter itself carries no language
  * -specific knowledge; all such classification is delegated to classifierFn.
  */
-export declare function createHtmlFromTape(tape: X.Tape, classifierFn: ClassifierFn): void;
-/**
- *
- */
-export declare class HtmlPrinter {
-    constructor(tape: X.Tape, classifierFn: ClassifierFn);
-    private readonly tape;
-    private readonly classifierFn;
-    /** */
-    toHtml(): string;
-    /** */
-    private mapMaskToSpanRecursive;
-    /** */
-    private spanifyToken;
-}
+export declare function translateTapeToHtml(tape: X.Tape, classifierFn: ClassifierFn): string;
