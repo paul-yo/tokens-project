@@ -7,11 +7,15 @@
 	"extensions": {
 		"recommendations": [
 			"connor4312.nodejs-testing"
-		]
+		],
 	},
 	"settings": {
 		"js/ts.tsdk.path": "node_modules/typescript/lib",
 		"js/ts.tsdk.promptToUseWorkspaceVersion": true,
+		"nodejs-testing.extensions": [{
+			"extensions": ["ts"],
+			"parameters": []
+		}],
 		"search.exclude": {
 			"**/node_modules": true,
 			"llm-context": true
@@ -22,10 +26,6 @@
 		"nodejs-testing.include": [
 			"./src-tests/"
 		],
-		"nodejs-testing.extensions": [{
-			"extensions": ["ts"],
-			"parameters": []
-		}],
 	},
 	"launch": {
 		"version": "0.2.0",
