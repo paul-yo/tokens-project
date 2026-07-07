@@ -27,7 +27,15 @@ export function translateTapeToHtml(tape: X.Tape, classifierFn: ClassifierFn)
 	}
 	
 	const rootSpan = span(["root"], ...spans);
-	return toSpanStringRecursive(rootSpan);
+	return [
+		"<!DOCTYPE html>",
+		`<link rel="preconnect" href="https://fonts.googleapis.com">`,
+		`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`,
+		`<link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`,
+		`<link rel="stylesheet" type="text/css" href="sample.css">`,
+		`<link rel="stylesheet" type="text/css" href="sample.css">`,
+		toSpanStringRecursive(rootSpan),
+	].join("\n");
 }
 
 /** */
@@ -41,32 +49,57 @@ function mapMaskToSpanRecursive(mask: X.Mask, classifierFn: ClassifierFn)
 		for (const fixedToken of maskField.structureBefore)
 			content.push(spanifyToken(fixedToken, classifierFn));
 		
-		if (maskField.field.kind === "has")
+		const enc = maskField.field.data.enclosure;
+		if (enc.left && enc.right)
 		{
-			if (maskField.value === true)
-				content.push(...maskField.field.match.map(t => spanifyToken(t, classifierFn)));
+			const enclosureContent: TSpanChild[] = [];
+			
+			if (enc.left)
+				enclosureContent.push(spanifyToken(enc.left, classifierFn));
+			
+			enclosureContent.push(...translateField(maskField, classifierFn));
+			
+			if (enc.right)
+				enclosureContent.push(spanifyToken(enc.right, classifierFn));
+			
+			content.push(span([enc.kind], ...enclosureContent));
 		}
-		else for (const maskFieldValue of X.toArray(maskField.value).flat())
-		{
-			if (maskFieldValue === null)
-				continue;
-			
-			if (maskFieldValue instanceof X.Mask)
-				content.push(mapMaskToSpanRecursive(maskFieldValue, classifierFn));
-			
-			else if (maskFieldValue instanceof X.FlexToken ||
-				maskFieldValue instanceof X.FixedToken ||
-				maskFieldValue instanceof X.RawToken)
-				content.push(spanifyToken(maskFieldValue, classifierFn));
-			
-			else debugger;
-		}
+		else content.push(...translateField(maskField, classifierFn));
 		
 		for (const fixedToken of maskField.structureAfter)
 			content.push(spanifyToken(fixedToken, classifierFn));
 	}
 	
 	return span(classes, ...content);
+}
+
+/** */
+function translateField(reflected:  X.IMaskReflectedField, classifierFn: ClassifierFn)
+{
+	const content: TSpanChild[] = [];
+	
+	if (reflected.field.kind === "has")
+	{
+		if (reflected.value === true)
+			content.push(...reflected.field.match.map(t => spanifyToken(t, classifierFn)));
+	}
+	else for (const maskFieldValue of X.toArray(reflected.value).flat())
+	{
+		if (maskFieldValue === null)
+			continue;
+		
+		if (maskFieldValue instanceof X.Mask)
+			content.push(mapMaskToSpanRecursive(maskFieldValue, classifierFn));
+		
+		else if (maskFieldValue instanceof X.FlexToken ||
+			maskFieldValue instanceof X.FixedToken ||
+			maskFieldValue instanceof X.RawToken)
+			content.push(spanifyToken(maskFieldValue, classifierFn));
+		
+		else debugger;
+	}
+	
+	return content;
 }
 
 /** */
@@ -106,7 +139,7 @@ function toSpanStringRecursive(span: ISpan): string
 {
 	const cls = span.classes.length > 0 ? ` class="${span.classes.join(" ")}"` : "";
 	const inner = span.children.map(c => typeof c === "string" ? c : toSpanStringRecursive(c)).join("");
-	return `<span${cls}>${inner}</span>`;
+	return `\n<span${cls}>${inner}</span>`;
 }
 
 /** */

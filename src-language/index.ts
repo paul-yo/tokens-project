@@ -21,7 +21,9 @@ async function start()
 	X.applyApexMasks(tape, X.SpaceBodyMasks);
 	
 	const htmlText = X.translateTapeToHtml(tape, () => []);
-	console.log(htmlText);
+	const folder = "./+output/";
+	Fs.mkdirSync(folder, { recursive: true });
+	Fs.writeFileSync(folder + "sample.html", htmlText, "utf-8");
 }
 
 /** */
