@@ -1,0 +1,5 @@
+foo() (
+	result = items each item (
+		console.log(item)
+	)
+)

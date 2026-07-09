@@ -1,0 +1,5 @@
+foo() (
+	result = value matches (
+		1 2
+	)
+)
