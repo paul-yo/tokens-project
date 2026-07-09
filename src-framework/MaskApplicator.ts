@@ -92,7 +92,6 @@ function tryApplyMask(
 			}
 			
 			const lens = tape.slice(group.start, group.end);
-			//if (field.description.startsWith("InfixedChainMask")) debugger;
 			mask[group.name] = getFieldValue(lens, field, depth + 1);
 		}
 		
@@ -244,6 +243,8 @@ function getMatchFieldValue(tapeLike: X.TapeLike, field: TMatchableField, depth 
 			const e = tapeLike.at(0);
 			if (e instanceof match)
 				return e;
+			
+			if (field.description === "MatchesMask.body") debugger;
 			
 			const unmaskedTokenCountBefore = tapeLike.unmaskedTokenCount;
 			const result = tryApplyMask(tapeLike, match.descriptor, depth + 1);

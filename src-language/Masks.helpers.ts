@@ -2,8 +2,8 @@ import * as X from "./XX.ts";
 
 /** */
 export type TExpressionable = 
-	typeof X.EntityToken | 
-	typeof X.LiteralToken |
+	X.EntityToken | 
+	X.LiteralToken |
 	X.ExpressionMasks;
 
 /**
