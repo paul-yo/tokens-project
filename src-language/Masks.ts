@@ -607,11 +607,63 @@ export class EachMask extends X.Mask
 /** */
 export class MatchesMask extends X.Mask
 {
-	createSchema() { return {
+	readonly prefix: X.TExpressionable = X.unset;
+	readonly body: X.MatchesBodyMask = X.unset;
+	
+	createSchema(): X.TMaskSchema { return {
 		[X.schemaOptions]: {
 			suffix: true,
 		},
+		prefix: X.lasso(...X.ExpressionMasks),
 		...X.anchor(X.tokens.matches),
+		body: X.one(X.MatchesBodyMask).paren()
+	}}
+}
+
+/** */
+export class MatchesBodyMask extends X.EnclosureMask
+{
+	readonly content: X.MatchesArmMask[] = X.unset;
+	
+	createSchemaEnclosed() { return {
+		enclosure: X.Enclosure.paren,
+		content: X.many(
+			X.MatchesEmptyArmMask,
+			X.MatchesElseArmMask,
+			X.MatchesArmMask),
+	}}
+}
+
+/** */
+export class MatchesEmptyArmMask extends X.Mask
+{
+	readonly case: X.EntityToken | X.LiteralToken = X.unset;
+	
+	createSchema() { return {
+		case: X.one(X.EntityToken, X.LiteralToken),
+	}}
+}
+
+/** */
+export class MatchesElseArmMask extends X.Mask
+{
+	readonly result: X.TExpressionable = X.unset;
+	
+	createSchema() { return {
+		...X.anchor(X.tokens.else),
+		result: X.lasso(...X.ExpressionMasks),
+	}}
+}
+
+/** */
+export class MatchesArmMask extends X.Mask
+{
+	readonly case: X.EntityToken | X.LiteralToken = X.unset;
+	readonly result: X.TExpressionable = X.unset;
+	
+	createSchema() { return {
+		case: X.one(X.EntityToken, X.LiteralToken),
+		result: X.lasso(...X.ExpressionMasks),
 	}}
 }
 
