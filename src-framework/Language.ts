@@ -69,13 +69,20 @@ export class Language
 	private lexer: moo.Lexer;
 	private spec: ILanguageSpec;
 	
-	/** Creates a hierarchial tape which is parsed from the specified code string. */
-	createTape(codeText: string)
+	/** Turns the code into a string array containing the lexically separated tokens. */
+	createTokenStrings(codeText: string)
 	{
 		this.lexer.reset(codeText);
 		const mooTokens = Array.from(this.lexer);
-		const textTokens = mooTokens.map(s => s.text);
-		const parser = new X.TapeParser(textTokens, this.spec);
+		const stringTokens = mooTokens.map(s => s.text);
+		return stringTokens;
+	}
+	
+	/** Creates a hierarchial tape which is parsed from the specified code string. */
+	createTape(codeText: string)
+	{
+		const tokenStrings = this.createTokenStrings(codeText);
+		const parser = new X.TapeParser(tokenStrings, this.spec);
 		return parser.parse();
 	}
 }
