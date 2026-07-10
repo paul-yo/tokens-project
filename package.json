@@ -12,8 +12,9 @@
 	],
 	"type": "module",
 	"scripts": {
+		"prebuild": "node prebuild.ts",
 		"start": "node src-language/index.ts",
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "node --test ${1:-src-tests/**/*.test.ts}",
 		"prepare": "husky"
 	},
 	"dependencies": {

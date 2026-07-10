@@ -2,6 +2,6 @@ if ! npx tsc -p tsconfig.context.json; then
 	echo "⚠️  tsc declaration generation failed — committing anyway"
 fi
 
-git add ./llm-context/api
+git add ./context/api
 
 exit 0

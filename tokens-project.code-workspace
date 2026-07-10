@@ -18,10 +18,10 @@
 		}],
 		"search.exclude": {
 			"**/node_modules": true,
-			"llm-context": true
+			"context": true
 		},
 		"files.exclude": {
-			"llm-context": true
+			"context": true
 		},
 		"nodejs-testing.include": [
 			"./src-tests/"
@@ -49,6 +49,18 @@
 					"<node_internals>/**"
 				],
 				"console": "integratedTerminal"
+			}
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "prebuild",
+				"type": "npm",
+				"script": "prebuild",
+				"group": "build",
+				"problemMatcher": []
 			}
 		]
 	}

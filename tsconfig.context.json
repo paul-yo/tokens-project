@@ -4,7 +4,7 @@
 		"noEmit": false,
 		"declaration": true,
 		"emitDeclarationOnly": true,
-		"outDir": "./llm-context/api",
+		"outDir": "./context/api",
 		"rootDir": "./src-framework"
 	},
 	"include": [
