@@ -5,7 +5,7 @@ export type TClassifiable = X.Mask | X.Token | X.Tape | X.Fragment;
 export type ClassifierFn = (node: TClassifiable) => readonly string[];
 
 /**
- * Projects the specified Tape into an HTML string, as described by the
+ * Prints the specified Tape into an HTML string, as described by the
  * "HTML Emitter Specification". The emitter itself carries no language
  * -specific knowledge; all such classification is delegated to classifierFn.
  */
@@ -74,7 +74,7 @@ function mapMaskToSpanRecursive(mask: X.Mask, classifierFn: ClassifierFn)
 }
 
 /** */
-function translateField(reflected:  X.IMaskReflectedField, classifierFn: ClassifierFn)
+function translateField(reflected: X.IMaskReflectedField, classifierFn: ClassifierFn)
 {
 	const content: TSpanChild[] = [];
 	
@@ -110,7 +110,6 @@ function spanifyToken(token: X.FixedToken, classifierFn: ClassifierFn)
 	return spn;
 }
 
-
 //# Span IR / printing
 
 /** */
@@ -129,21 +128,45 @@ function span(classes: readonly string[], ...children: readonly TSpanChild[]): I
 }
 
 /** */
-function toSpanString(...spans: ISpan[])
-{
-	return spans.map(toSpanStringRecursive).join("");
-}
-
-/** */
-function toSpanStringRecursive(span: ISpan): string
+function toSpanStringRecursive(span: ISpan, depth = 0): string
 {
 	const cls = span.classes.length > 0 ? ` class="${span.classes.join(" ")}"` : "";
-	const inner = span.children.map(c => typeof c === "string" ? c : toSpanStringRecursive(c)).join("");
-	return `\n<span${cls}>${inner}</span>`;
+	const indent = "\t".repeat(depth);
+	const hasStringChild = span.children.some(c => typeof c === "string");
+	
+	if (hasStringChild)
+	{
+		const inner = span.children.map(toSpanStringInline).join("");
+		return `${indent}<span${cls}>${inner}</span>`;
+	}
+	
+	if (span.children.length === 0)
+		return `${indent}<span${cls}></span>`;
+	
+	const inner = span.children
+		.map(c => toSpanStringRecursive(c as ISpan, depth + 1))
+		.join("\n");
+	
+	return `${indent}<span${cls}>\n${inner}\n${indent}</span>`;
 }
 
+/**
+ * Renders a span and all of its descendants on a single line, with
+ * no indentation and no separators between children.
+ */
+function toSpanStringInline(child: TSpanChild): string
+{
+	if (typeof child === "string")
+		return child;
+	
+	const cls = child.classes.length > 0 ? ` class="${child.classes.join(" ")}"` : "";
+	const inner = child.children.map(toSpanStringInline).join("");
+	return `<span${cls}>${inner}</span>`;
+}
+
+
 /** */
-function toCssClass(maskName: string): string
+export function toCssClass(maskName: string): string
 {
 	const trimmed = maskName.endsWith("Mask") ? maskName.slice(0, -4) : maskName;
 	return trimmed
