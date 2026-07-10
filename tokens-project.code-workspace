@@ -33,8 +33,8 @@
 			{
 				"type": "node",
 				"request": "launch",
-				"name": "Debug Test",
-				"program": "src-tests/Tape.test.ts",
+				"name": "Debug Parser Tests",
+				"program": "src-tests/Parse.test.ts",
 				"skipFiles": [
 					"<node_internals>/**"
 				],
@@ -43,13 +43,13 @@
 			{
 				"type": "node",
 				"request": "launch",
-				"name": "Debug Project",
-				"program": "src-language/index.ts",
+				"name": "Debug Prebuild",
+				"program": "prebuild.ts",
 				"skipFiles": [
 					"<node_internals>/**"
 				],
 				"console": "integratedTerminal"
-			}
+			},
 		]
 	},
 	"tasks": {

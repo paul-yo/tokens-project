@@ -11,5 +11,5 @@ export * from "./Field.ts";
 export * from "./Mask.ts";
 export * from "./MaskDescriptor.ts";
 export * from "./MaskApplicator.ts";
-export * from "./HtmlPrinter.ts";
+export * from "./GenericHtmlPrinter.ts";
 export * from "./Language.ts";

@@ -4,3 +4,5 @@ export * from "./Masks.helpers.ts";
 export * from "./Masks.selects.ts";
 export * from "./Masks.ts";
 export * from "./Masks.sums.ts";
+export * from "./HtmlPrinter.ts";
+export * from "./CreateLanguage.ts";

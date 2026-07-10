@@ -1,23 +1,13 @@
 import * as X from "../src-language/XX.ts";
 import * as Fs from "fs";
-import * as Masks from "../src-language/Masks.ts";
 import assert from "node:assert";
 
 /** */
 export function roundTripParseCase(filePath: string)
 {
-	const lang = new X.Language({
-		masks: Object.values(Masks),
-		fragmentationToken: X.tokens.comma,
-		fixedTokens: Object.values(X.tokens),
-		physicalFlexTokens: X.flexTokens,
-		abstractFlexTokens: X.flexTokensAbstract,
-	});
-	
+	const lang = new X.ProjectLanguage();
 	const codeText = Fs.readFileSync(filePath, "utf-8");
-	const tape = lang.createTape(codeText);
-	X.applyApexMasks(tape, X.SpaceBodyMasks);
-	
+	const tape = lang.createMaskedTape(codeText);
 	const tokenStrings = lang.createTokenStrings(codeText)
 		.filter(s => !/^[\r\n\t\s]$/g.test(s));
 	
