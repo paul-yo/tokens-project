@@ -1,6 +1,5 @@
 import * as X from "../src-language/XX.ts";
 import { test } from "node:test";
-import assert from "node:assert/strict";
 
 /** */
 test("Basic tape test", () =>
