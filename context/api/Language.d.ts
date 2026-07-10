@@ -18,6 +18,8 @@ export declare class Language {
     constructor(spec: ILanguageSpec);
     private lexer;
     private spec;
+    /** Turns the code into a string array containing the lexically separated tokens. */
+    createTokenStrings(codeText: string): string[];
     /** Creates a hierarchial tape which is parsed from the specified code string. */
     createTape(codeText: string): X.Tape;
 }
