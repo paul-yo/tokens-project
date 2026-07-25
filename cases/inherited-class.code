@@ -1,0 +1,11 @@
+Animal (
+	eat() (
+		
+	)
+)
+
+Bunny is Animal (
+	eat() (
+		
+	)
+)

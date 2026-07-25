@@ -6,6 +6,8 @@ import { roundTripParseCase } from "./ParseFixture.ts";
 
 test("Round-tripping: complex-matches.code", () => 
 	roundTripParseCase("./cases/complex-matches.code"));
+test("Round-tripping: inherited-class.code", () => 
+	roundTripParseCase("./cases/inherited-class.code"));
 test("Round-tripping: negative-values.code", () => 
 	roundTripParseCase("./cases/negative-values.code"));
 test("Round-tripping: sample-spaced.code", () => 
