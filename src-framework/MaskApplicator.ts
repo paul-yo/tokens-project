@@ -244,7 +244,7 @@ function getMatchFieldValue(tapeLike: X.TapeLike, field: TMatchableField, depth 
 			if (e instanceof match)
 				return e;
 			
-			if (field.description === "MatchesMask.body") debugger;
+			//if (field.description === "MatchesMask.body") debugger;
 			
 			const unmaskedTokenCountBefore = tapeLike.unmaskedTokenCount;
 			const result = tryApplyMask(tapeLike, match.descriptor, depth + 1);
@@ -265,12 +265,18 @@ function getMatchFieldValue(tapeLike: X.TapeLike, field: TMatchableField, depth 
 		}
 		else if (X.FlexToken.isType(match))
 		{
+			if (tapeLike.maskedSize !== 1)
+				continue;
+			
 			const e = tapeLike.at(0);
 			if (e instanceof match)
 				return e;
 		}
 		else if (X.isSelectMatch(match))
 		{
+			if (tapeLike.maskedSize !== 1)
+				continue;
+			
 			const e = tapeLike.at(0);
 			if (X.isSelectMatchMember(e, match))
 				return e;

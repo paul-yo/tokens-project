@@ -148,6 +148,9 @@ const flexTypeBitsMap = new Map<typeof X.FlexToken, number>();
 /** */
 function asPlain(flex: X.FlexToken)
 {
+	if (!flex || typeof flex !== "object")
+		return null;
+	
 	const plain = flex as any as IPlainFlexToken;
 	if (typeof plain.id === "number" && plain.id >= 0)
 		return plain;

@@ -68,11 +68,6 @@ export abstract class Mask
 		const schema = this.createSchema();
 		const objectEntries = Object.entries(schema);
 		const structureBuffer: X.FixedToken[] = [];
-		const lastIndex = objectEntries.length - 1;
-		const [lastName, lastField] = objectEntries[lastIndex];
-		const lastStructure = X.isAnchorProperty(lastName) ?
-			X.toArray(lastField) as any as X.FixedToken[] :
-			[];
 		
 		for (let i = -1; ++i < objectEntries.length;)
 		{
@@ -94,10 +89,15 @@ export abstract class Mask
 				value,
 				field,
 				anchorConditional: structureConditional,
-				structureBefore: structureBuffer,
-				structureAfter: i === lastIndex ? lastStructure : [],
+				structureBefore: [...structureBuffer],
+				structureAfter: [],
 			});
+			structureBuffer.length = 0;
 		}
+		
+		const lastEntry = maskEntries.at(-1);
+		if (lastEntry && structureBuffer.length > 0)
+			(lastEntry as X.TWritable<IMaskReflectedField>).structureAfter = structureBuffer;
 		
 		return maskEntries;
 	}

@@ -172,14 +172,13 @@ export class Lens
 		let pos = 0;
 		for (const element of this.source.scan())
 		{
-			if (pos < this.sliceBegin)
+			if (pos++ < this.sliceBegin)
 				continue;
 			
-			if (pos >= this.sliceEnd)
+			if (pos > this.sliceEnd)
 				break;
 			
 			yield element;
-			pos++;
 		}
 	}
 	

@@ -23,17 +23,30 @@ function printParsedCode(tape: X.Tape)
 	
 	const recurse = (mask: X.Mask) =>
 	{
+		const maskType = mask.constructor as typeof X.Mask;
+		const maskEnclosure = maskType.descriptor.enclosure;
+		
+		if (maskEnclosure.left)
+			tokens.push(maskEnclosure.left.text);
+		
 		for (const maskField of mask.queryFields())
 		{
 			for (const fixedToken of maskField.structureBefore)
 				tokens.push(fixedToken.text);
 			
 			const enc = maskField.field.data.enclosure;
+			const fieldValue = X.toArray(maskField.value).flat();
+			const valueHasSameEnclosure = fieldValue.some(v =>
+				v instanceof X.Mask &&
+				(v.constructor as typeof X.Mask).descriptor.enclosure === enc);
 			
-			if (enc.left)
+			if (enc.left && !valueHasSameEnclosure)
 				tokens.push(enc.left.text);
 			
-			for (const maskFieldValue of X.toArray(maskField.value).flat())
+			for (const fixedToken of maskField.anchorConditional)
+				tokens.push(fixedToken.text);
+			
+			for (const maskFieldValue of fieldValue)
 			{
 				if (maskFieldValue instanceof X.Mask)
 					recurse(maskFieldValue);
@@ -44,12 +57,15 @@ function printParsedCode(tape: X.Tape)
 					tokens.push(maskFieldValue.text);
 			}
 			
-			if (enc.right)
+			if (enc.right && !valueHasSameEnclosure)
 				tokens.push(enc.right.text);
 			
 			for (const fixedToken of maskField.structureAfter)
 				tokens.push(fixedToken.text);
 		}
+		
+		if (maskEnclosure.right)
+			tokens.push(maskEnclosure.right.text);
 	}
 	
 	tape.readAll();
@@ -58,5 +74,5 @@ function printParsedCode(tape: X.Tape)
 		if (cursor.mask)
 			recurse(cursor.mask);
 	
-	return tokens;
+	return tokens.join(" ");
 }
