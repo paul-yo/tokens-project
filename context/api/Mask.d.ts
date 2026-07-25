@@ -15,7 +15,9 @@ export type TMaskSchemaEnclosed = {
     content: X.IManyField | X.IOneField;
 };
 /** */
-export type TMaskValue = boolean | X.FixedToken | X.FlexToken | X.RawToken | X.Mask;
+export type TMaskValue = boolean | X.Token | X.Mask;
+/** */
+export type TMaskContentValue = X.Token | X.Mask;
 declare const maskBrand: unique symbol;
 /** */
 export declare abstract class Mask {
@@ -91,7 +93,7 @@ export interface IMaskReflectedField {
  *
  */
 export declare abstract class EnclosureMask extends X.Mask {
-    abstract readonly content: X.Mask | X.Mask[];
+    abstract readonly content: X.TMaskContentValue | X.TMaskContentValue[];
     /** */
     static get isEnclosureMask(): boolean;
     /** */

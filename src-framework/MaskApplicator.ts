@@ -52,11 +52,30 @@ function tryApplyMask(
 	descriptor: X.MaskDescriptor,
 	depth = 0)
 {
+	let matchTarget = tape;
+	let applyFrom: number | null = null;
+	let applyTo: number | null = null;
+	
+	if (descriptor.enclosure !== X.Enclosure.none)
+	{
+		const enclosed = tape.at(0);
+		if (!(enclosed instanceof X.Tape))
+			return null;
+		
+		if (enclosed.enclosure !== descriptor.enclosure)
+			return null;
+		
+		enclosed.readAll();
+		matchTarget = enclosed;
+		applyFrom = 0;
+		applyTo = 1;
+	}
+	
 	const matcher = descriptor.enclosureIgnoringMatcher;
 	if (!matcher)
 		return null;
 	
-	const matchesArray = Array.from(matchAll(tape.charstring, matcher))
+	const matchesArray = Array.from(matchAll(matchTarget.charstring, matcher))
 		.filter((m): m is RegExpMatchArray => !!m)
 		.map(sanitizeMatches)
 		.filter((m): m is TMatches => !!m);
@@ -91,12 +110,14 @@ function tryApplyMask(
 				continue;
 			}
 			
-			const lens = tape.slice(group.start, group.end);
+			const lens = matchTarget.slice(group.start, group.end);
 			mask[group.name] = getFieldValue(lens, field, depth + 1);
 		}
 		
-		const matchSpan = matches.to - matches.from;
-		tape.applyMask(mask as X.Mask, matches.from, matches.to);
+		const maskFrom = applyFrom ?? matches.from;
+		const maskTo = applyTo ?? matches.to;
+		const matchSpan = maskTo - maskFrom;
+		tape.applyMask(mask as X.Mask, maskFrom, maskTo);
 		
 		// If the match span was > 1, then go through all masks that exist after 
 		// the current one in the array and bump their index positions by the 
@@ -109,7 +130,7 @@ function tryApplyMask(
 		{
 			for (let n = i + 1; n < matchesArray.length; n++)
 			{
-				const matches = matchesArray[i];
+				const matches = matchesArray[n];
 				matches.from -= matchSpan;
 				matches.to -= matchSpan;
 				

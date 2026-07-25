@@ -18,9 +18,12 @@ export type TMaskSchemaEnclosed = {
 /** */
 export type TMaskValue = 
 	boolean |
-	X.FixedToken | 
-	X.FlexToken |
-	X.RawToken |
+	X.Token |
+	X.Mask;
+
+/** */
+export type TMaskContentValue =
+	X.Token |
 	X.Mask;
 
 const maskBrand = Symbol("maskBrand");
@@ -168,7 +171,7 @@ export interface IMaskReflectedField
  */
 export abstract class EnclosureMask extends X.Mask
 {
-	abstract readonly content: X.Mask | X.Mask[];
+	abstract readonly content: X.TMaskContentValue | X.TMaskContentValue[];
 	
 	/** */
 	static get isEnclosureMask() { return true; }

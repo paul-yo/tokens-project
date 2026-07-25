@@ -723,22 +723,22 @@ export class SpreadExpressionMask extends X.Mask
 /** (x) */
 export class FunctionActivatorMask extends X.EnclosureMask
 {
-	readonly content: X.ExpressionMasks[] = X.unset;
+	readonly content: X.TExpressionable[] = X.unset;
 	
 	createSchemaEnclosed() { return {
 		enclosure: X.Enclosure.paren,
-		content: X.many(...X.ExpressionMasks),
+		content: X.many(X.EntityToken, X.LiteralToken, ...X.ExpressionMasks),
 	}}
 }
 
 /** [x] */
 export class IndexActivatorMask extends X.EnclosureMask
 {
-	readonly content: X.ExpressionMasks = X.unset;
+	readonly content: X.TExpressionable[] = X.unset;
 	
 	createSchemaEnclosed() { return {
 		enclosure: X.Enclosure.bracket,
-		content: X.many(...X.ExpressionMasks),
+		content: X.many(X.EntityToken, X.LiteralToken, ...X.ExpressionMasks),
 	}}
 }
 
