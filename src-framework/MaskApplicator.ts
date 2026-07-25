@@ -98,8 +98,9 @@ function tryApplyMask(
 		const mask = new (descriptor.type as any)(); // 🫤
 		const matches = matchesArray[i];
 		
-		for (const group of matches.groups)
+		for (let g = matches.groups.length; g-- > 0;)
 		{
+			const group = matches.groups[g];
 			const field = descriptor.schema[group.name];
 			
 			// If there is a zero-length result then there is no point

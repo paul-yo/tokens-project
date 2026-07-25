@@ -9,7 +9,7 @@ export function roundTripParseCase(filePath: string)
 	const codeText = Fs.readFileSync(filePath, "utf-8");
 	const tape = lang.createMaskedTape(codeText);
 	const tokenStrings = lang.createTokenStrings(codeText)
-		.filter(s => !/^[\r\n\t\s]$/g.test(s));
+		.filter(s => !/^\s+$/.test(s));
 	
 	const tokensConcatParsed = printParsedCode(tape);
 	const tokensConcatExpected = tokenStrings.join(" ");

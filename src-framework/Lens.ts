@@ -143,9 +143,15 @@ export class Lens
 	/** */
 	get charstring()
 	{
-		const begin = Math.max(0, this.sliceBegin);
-		const end = this.sliceEnd < 0 ? this.source.tokenSize : this.sliceEnd;
-		return this.source.charstring.slice(begin, end);
+		const chars: string[] = [];
+		
+		for (const cursor of this.scan())
+		{
+			const element = cursor.mask || cursor.token;
+			chars.push(X.Proxy.get(element));
+		}
+		
+		return chars.join("");
 	}
 	
 	/** */
@@ -170,12 +176,15 @@ export class Lens
 		this.checkLamports();
 		
 		let pos = 0;
+		const begin = this.sliceBeginMaskRelative;
+		const end = this.sliceEndMaskRelative;
+		
 		for (const element of this.source.scan())
 		{
-			if (pos++ < this.sliceBegin)
+			if (pos++ < begin)
 				continue;
 			
-			if (pos > this.sliceEnd)
+			if (pos > end)
 				break;
 			
 			yield element;

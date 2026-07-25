@@ -792,25 +792,25 @@ export class PostParticleMask extends X.Mask
 export class InfixedParticleMask extends X.Mask
 {
 	readonly operator: X.InfixOperatorKind = X.unset;
-	readonly particle: (CompoundParticleMask | OriginParticleMask) = X.unset;
+	readonly particle: (CompoundParticleMask | OriginParticleMask | X.LiteralToken) = X.unset;
 	
 	createSchema() { return {
 		operator: X.one(X.InfixOperatorKind),
-		particle: X.one(X.CompoundParticleMask, X.OriginParticleMask),
+		particle: X.one(X.CompoundParticleMask, X.OriginParticleMask, X.LiteralToken),
 	}}
 }
 
 /** term + term + term */
 export class InfixedChainMask extends X.Mask
 {
-	readonly origin: (X.CompoundParticleMask | X.OriginParticleMask) = X.unset;
+	readonly origin: (X.CompoundParticleMask | X.OriginParticleMask | X.LiteralToken) = X.unset;
 	readonly successors: InfixedParticleMask[] = X.unset;
 	
 	createSchema() { return {
 		[X.schemaOptions]: {
 			sparse: true,
 		},
-		origin: X.one(CompoundParticleMask, OriginParticleMask),
+		origin: X.one(CompoundParticleMask, OriginParticleMask, X.LiteralToken),
 		successors: X.some(InfixedParticleMask),
 	}}
 }
