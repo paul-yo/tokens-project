@@ -320,7 +320,7 @@ function createPatternForField(field: X.TField, inside: boolean): string[]
 		// anything else because we've already determined that
 		// anything can match.
 		else if (inside || !match.descriptor.insidePattern)
-			return [wildcard];
+			return [field.kind === "many" ? ".*?" : wildcard];
 		
 		else
 			embeds.push("(" + match.descriptor.insidePattern + ")");
