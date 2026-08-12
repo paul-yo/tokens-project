@@ -7,8 +7,10 @@ import * as X from "./XX.ts";
  * paren-enclosed body of statements or expresions.
  */
 type Body = (X.StatementMasks | X.ExpressionMasks)[];
+type SimpleType = X.EntityToken | X.FixedToken;
 const reuse = {
-	get body(): X.IManyField { return X.many(...X.StatementMasks, ...X.ExpressionMasks).paren(); }
+	get body(): X.IManyField { return X.many(...X.StatementMasks, ...X.ExpressionMasks).paren(); },
+	get type(): X.IOneField { return X.one(X.EntityToken, ...Object.values(X.tokenGroups.primitives)); },
 } as const;
 
 //# Top level Masks (used everywhere)
@@ -34,8 +36,13 @@ export class ControlFlowMask extends X.EnclosureMask
  */
 export class TypeExpressionMask extends X.Mask
 {
-	createSchema() { return {
-		
+	readonly value: X.EntityToken | X.FixedToken = X.unset;
+
+	createSchema(): X.TMaskSchema { return {
+		value: X.one(
+			X.EntityToken,
+			...Object.values(X.tokenGroups.primitives),
+		),
 	}}
 }
 
@@ -120,12 +127,12 @@ export class ParameterMask extends X.Mask
 /** identifier is the_type */
 export class TypedParameterMask extends X.ParameterMask
 {
-	readonly type: X.TypeExpressionMask = X.unset;
+	readonly type: SimpleType = X.unset;
 	
 	createSchema() { return {
 		name: X.one(X.EntityToken),
 		...X.anchor(X.tokens.is),
-		type: X.one(X.TypeExpressionMask),
+		type: reuse.type,
 	}}
 }
 
@@ -146,13 +153,13 @@ export class DefaultParameterMask extends X.ParameterMask
 export class TypedDefaultParameterMask extends X.ParameterMask
 {
 	readonly name: X.EntityToken = X.unset;
-	readonly type: X.TypeExpressionMask = X.unset;
+	readonly type: SimpleType = X.unset;
 	readonly value: X.ExpressionMasks | null= X.unset;
 	
 	createSchema() { return {
 		name: X.one(X.EntityToken),
 		...X.anchor(X.tokens.is),
-		type: X.one(X.TypeExpressionMask),
+		type: reuse.type,
 		...X.anchor(X.tokens.basicAssign),
 		value: X.one(...X.ExpressionMasks),
 	}}
@@ -162,12 +169,12 @@ export class TypedDefaultParameterMask extends X.ParameterMask
 export class TypedOptionalParameterMask extends X.ParameterMask
 {
 	readonly name: X.EntityToken = X.unset;
-	readonly type: X.TypeExpressionMask = X.unset;
+	readonly type: SimpleType = X.unset;
 	
 	createSchema() { return {
 		name: X.one(X.EntityToken),
 		...X.anchor(X.tokens.is),
-		type: X.one(X.TypeExpressionMask),
+		type: reuse.type,
 		...X.anchor(X.tokens.basicAssign, X.tokens.question),
 	}}
 }
@@ -176,13 +183,13 @@ export class TypedOptionalParameterMask extends X.ParameterMask
 export class RestParameterMask extends X.ParameterMask
 {
 	readonly name: X.EntityToken = X.unset;
-	readonly type: X.TypeExpressionMask = X.unset;
+	readonly type: SimpleType = X.unset;
 	
 	createSchema() { return {
 		...X.anchor(X.tokens.spread),
 		name: X.one(X.EntityToken),
 		...X.anchor(X.tokens.is),
-		type: X.one(X.TypeExpressionMask),
+		type: reuse.type,
 	}}
 }
 
@@ -198,7 +205,7 @@ export class ConstructorFunctionMask extends FunctionMask
 	readonly signature: ParameterMask[] = X.unset;
 	
 	createSchema() { return {
-		signature: X.many(ParameterMask).paren(),
+		signature: X.many(...X.ParameterMasks).paren(),
 		body: reuse.body,
 	}}
 }
@@ -219,8 +226,9 @@ export class StableFunctionMask extends FunctionMask
 	readonly signature: ParameterMask[] = X.unset;
 	
 	createSchema() { return {
+		...X.anchor(X.tokens.fn),
 		name: X.one(X.EntityToken),
-		signature: X.many(ParameterMask).paren(),
+		signature: X.many(...X.ParameterMasks).paren(),
 		body: reuse.body,
 	}}
 };
@@ -580,7 +588,7 @@ export class ExpressionStatementMask extends X.Mask
 	readonly expression: X.TExpressionable = X.unset;
 	
 	createSchema() { return {
-		expression: X.lasso(X.EntityToken, X.LiteralToken, ...X.ExpressionMasks),
+		expression: X.lasso(...X.ExpressionMasks, X.EntityToken, X.LiteralToken),
 	}}
 }
 

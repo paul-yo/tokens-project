@@ -44,7 +44,7 @@
 				"type": "node",
 				"request": "launch",
 				"name": "Debug Prebuild",
-				"program": "prebuild.ts",
+				"program": "tasks.ts",
 				"skipFiles": [
 					"<node_internals>/**"
 				],

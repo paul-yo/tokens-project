@@ -12,9 +12,12 @@
 	],
 	"type": "module",
 	"scripts": {
-		"prebuild": "node prebuild.ts",
+		"prebuild": "node tasks.ts all",
+		"legend": "node tasks.ts legend",
+		"print": "node tasks.ts print",
 		"start": "node src-language/index.ts",
-		"test": "node --test ${1:-src-tests/**/*.test.ts}",
+		"typecheck": "tsc --noEmit",
+		"test": "node tasks.ts tests",
 		"prepare": "husky"
 	},
 	"dependencies": {

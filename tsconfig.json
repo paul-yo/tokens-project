@@ -19,4 +19,10 @@
 		"isolatedModules": true,
 		"resolveJsonModule": true
 	},
+	"include": [
+		"tasks.ts",
+		"src-framework/**/*.ts",
+		"src-language/**/*.ts",
+		"src-tests/**/*.ts"
+	]
 }

@@ -1,5 +1,14 @@
 import * as X from "./XX.ts";
 
+export type ParameterMasks = X.Sum<typeof ParameterMasks>;
+export const ParameterMasks = X.sum(
+	X.TypedParameterMask,
+	X.TypedDefaultParameterMask,
+	X.TypedOptionalParameterMask,
+	X.RestParameterMask,
+	X.DefaultParameterMask,
+);
+
 export type SpaceBodyMasks = X.Sum<typeof SpaceBodyMasks>;
 export const SpaceBodyMasks = X.sum(
 	X.FromMask,
