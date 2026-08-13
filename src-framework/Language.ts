@@ -74,7 +74,7 @@ export class Language
 	{
 		this.lexer.reset(codeText);
 		const mooTokens = Array.from(this.lexer);
-		const stringTokens = mooTokens.map(s => s.text);
+		const stringTokens = mooTokens.map(s => s.value);
 		return stringTokens;
 	}
 	
@@ -95,10 +95,27 @@ function createLanguageLexer(spec: ILanguageSpec)
 	
 	for (const delimiter of Object.values(X.delimiters))
 		rules[delimiter.text] = delimiter.text;
+
+	// Compound fixed tokens have one canonical spelling, but accept any
+	// positive amount of horizontal whitespace between their words.
+	const compoundFixedTokens = spec.fixedTokens
+		.filter(token => token.text.includes(" "))
+		.sort((a, b) => b.text.length - a.text.length);
+
+	for (const fixedToken of compoundFixedTokens)
+	{
+		const parts = fixedToken.text.split(" ").map(escapeRegExp);
+		rules[fixedToken.text] = {
+			match: new RegExp(parts.join("[ \\t]+") + "\\b", "u"),
+			value: () => fixedToken.text,
+		};
+	}
 	
 	for (const fixedToken of spec.fixedTokens)
 	{
-		if (X.EntityToken.pattern.test(fixedToken.text))
+		if (fixedToken.text.includes(" "))
+			continue;
+		else if (X.EntityToken.pattern.test(fixedToken.text))
 			words[fixedToken.text] = fixedToken.text;
 		else
 			rules[fixedToken.text] = fixedToken.text;
@@ -124,6 +141,12 @@ function createLanguageLexer(spec: ILanguageSpec)
 	};
 	
 	return moo.compile(rules);
+}
+
+/** Escapes text for literal inclusion in a regular expression. */
+function escapeRegExp(text: string)
+{
+	return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 /** Initializes the set of unicode proxy characters for the language. */
