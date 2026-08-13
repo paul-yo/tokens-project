@@ -40,15 +40,7 @@ export class GenericHtmlPrinter
 		}
 		
 		const rootSpan = span(["root"], ...spans);
-		return [
-			"<!DOCTYPE html>",
-			`<link rel="preconnect" href="https://fonts.googleapis.com">`,
-			`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`,
-			`<link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`,
-			`<link rel="stylesheet" type="text/css" href="sample.css">`,
-			`<link rel="stylesheet" type="text/css" href="sample.css">`,
-			toSpanStringRecursive(rootSpan),
-		].join("\n");
+		return toSpanStringRecursive(rootSpan);
 	}
 
 	/** */
