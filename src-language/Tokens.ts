@@ -363,7 +363,8 @@ const primitives = Object.freeze({
 });
 
 const words = Object.freeze({
-	aliasof: new X.FixedToken("aliasof"),
+	aliasof: new X.FixedToken("alias of"),
+	always: new X.FixedToken("always"),
 	analyzer: new X.FixedToken("analyzer"),
 	and: new X.FixedToken("and"),
 	any: new X.FixedToken("any"),
@@ -381,10 +382,10 @@ const words = Object.freeze({
 	interface: new X.FixedToken("interface"),
 	isnot: new X.FixedToken("isnot"),
 	is: new X.FixedToken("is"),
-	manyof: new X.FixedToken("manyof"),
+	manyof: new X.FixedToken("many of"),
 	matches: new X.FixedToken("matches"),
-	oneof: new X.FixedToken("oneof"),
-	onevalueof: new X.FixedToken("onevalueof"),
+	oneof: new X.FixedToken("one of"),
+	onevalueof: new X.FixedToken("one value of"),
 	or: new X.FixedToken("or"),
 	ref: new X.FixedToken("ref"),
 	space: new X.FixedToken("space"),
@@ -396,7 +397,7 @@ const words = Object.freeze({
 	throw: new X.FixedToken("throw"),
 	til: new X.FixedToken("til"),
 	to: new X.FixedToken("to"),
-	typeof: new X.FixedToken("typeof"),
+	typeof: new X.FixedToken("type of"),
 	var: new X.FixedToken("var"),
 	weak: new X.FixedToken("weak"),
 	worker: new X.FixedToken("worker"),
